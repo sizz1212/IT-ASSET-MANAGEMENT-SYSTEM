@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - IT Asset Management System</title>
+
+    <link rel="stylesheet" href="static/css/style.css">
+
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+        }
+
+        body{
+            font-family:Arial,Helvetica,sans-serif;
+            background:#f4f6f9;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            min-height:100vh;
+        }
+
+        .login-box{
+            width:100%;
+            max-width:420px;
+            background:#fff;
+            padding:35px;
+            border-radius:15px;
+            box-shadow:0 10px 30px rgba(0,0,0,.12);
+        }
+
+        .login-box h2{
+            text-align:center;
+            color:#1f2937;
+            margin-bottom:8px;
+        }
+
+        .subtitle{
+            text-align:center;
+            color:#6b7280;
+            margin-bottom:25px;
+            font-size:14px;
+        }
+
+        .form-group{
+            margin-bottom:18px;
+        }
+
+        .form-group label{
+            display:block;
+            margin-bottom:6px;
+            color:#374151;
+            font-weight:600;
+        }
+
+        .form-group input{
+            width:100%;
+            padding:12px;
+            border:1px solid #d1d5db;
+            border-radius:8px;
+            font-size:14px;
+            transition:.3s;
+        }
+
+        .form-group input:focus{
+            outline:none;
+            border-color:#2563eb;
+            box-shadow:0 0 0 3px rgba(37,99,235,.15);
+        }
+
+        .btn-login{
+            width:100%;
+            padding:12px;
+            background:#2563eb;
+            color:white;
+            border:none;
+            border-radius:8px;
+            font-size:15px;
+            font-weight:600;
+            cursor:pointer;
+            transition:.3s;
+        }
+
+        .btn-login:hover{
+            background:#1d4ed8;
+        }
+
+        .btn-login:disabled{
+            background:#93c5fd;
+            cursor:not-allowed;
+        }
+
+        .flash{
+            padding:12px;
+            border-radius:8px;
+            margin-bottom:18px;
+            font-size:14px;
+        }
+
+        .flash.error{
+            background:#fee2e2;
+            color:#991b1b;
+        }
+
+        .flash.success{
+            background:#dcfce7;
+            color:#166534;
+        }
+
+        .flash.warning{
+            background:#fef3c7;
+            color:#92400e;
+        }
+
+        .footer{
+            text-align:center;
+            margin-top:20px;
+            color:#9ca3af;
+            font-size:13px;
+        }
+    </style>
+
+</head>
+<body>
+
+<div class="login-box">
+
+    <h2>IT Asset Management System</h2>
+    <p class="subtitle">Sign in to continue</p>
+
+    <!-- Flash messages placeholder (front-end only, no backend) -->
+    <div id="flashContainer"></div>
+
+    <form method="POST" action="#" id="loginForm">
+
+        <div class="form-group">
+            <label>Username</label>
+
+            <input
+                type="text"
+                name="username"
+                id="username"
+                placeholder="Enter your username"
+                autocomplete="username"
+                required>
+        </div>
+
+        <div class="form-group">
+            <label>Password</label>
+
+            <input
+                type="password"
+                name="password"
+                placeholder="Enter your password"
+                autocomplete="current-password"
+                required>
+        </div>
+
+        <button type="submit" class="btn-login" id="loginBtn">
+            Login
+        </button>
+
+    </form>
+
+    <div class="footer">
+        Intelligent IT Asset Management System
+    </div>
+
+</div>
+
+<script>
+document.getElementById("loginForm").addEventListener("submit", function(e){
+    e.preventDefault();
+
+    const btn = document.getElementById("loginBtn");
+
+    btn.disabled = true;
+    btn.innerHTML = "Signing in...";
+
+    // Front-end only: no backend auth. Just redirect to the dashboard.
+    setTimeout(function () {
+        window.location.href = "dashboard.html";
+    }, 400);
+});
+</script>
+
+</body>
+</html>

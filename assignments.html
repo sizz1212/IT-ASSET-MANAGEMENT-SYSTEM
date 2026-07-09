@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Assignments</title>
+<link rel="stylesheet" href="static/css/assignments.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link rel="stylesheet" href="static/css/style.css">
+<link rel="stylesheet" href="static/css/layout.css">
+<link rel="stylesheet" href="static/css/responsive-tweaks.css">
+<script src="static/js/layout.js"></script>
+</head>
+<body>
+
+<!-- Side Bar -->
+<nav class="sidebar" aria-label="Main navigation">
+    <div class="sidebar__brand">
+        <div class="sidebar__logo" aria-hidden="true">IT</div>
+        <div class="sidebar__brand-text">
+            <div class="sidebar__brand-name">IT Asset</div>
+            <div class="sidebar__brand-sub">Management System</div>
+        </div>
+    </div>
+
+<ul class="sidebar__nav">
+    <li>
+        <a class="sidebar__link" href="index.html">
+            <span class="sidebar__icon" aria-hidden="true">📊</span>
+            <span class="sidebar__label">Dashboard</span>
+        </a>
+    </li>
+
+    <li>
+        <a class="sidebar__link" href="assets.html">
+            <span class="sidebar__icon" aria-hidden="true">🧩</span>
+            <span class="sidebar__label">Assets</span>
+        </a>
+    </li>
+
+    <li>
+        <a class="sidebar__link" href="employees.html">
+            <span class="sidebar__icon" aria-hidden="true">👥</span>
+            <span class="sidebar__label">Employees</span>
+        </a>
+    </li>
+
+    <li>
+        <a class="sidebar__link" href="assignments.html">
+            <span class="sidebar__icon" aria-hidden="true">🧾</span>
+            <span class="sidebar__label">Assignments</span>
+        </a>
+    </li>
+
+    <li>
+        <a class="sidebar__link" href="maintenance.html">
+            <span class="sidebar__icon" aria-hidden="true">🛠️</span>
+            <span class="sidebar__label">Maintenance</span>
+        </a>
+    </li>
+
+    <li>
+        <a class="sidebar__link" href="reports.html">
+            <span class="sidebar__icon" aria-hidden="true">📈</span>
+            <span class="sidebar__label">Reports</span>
+        </a>
+    </li>
+
+    <li>
+        <a class="sidebar__link" href="settings.html">
+            <span class="sidebar__icon" aria-hidden="true">⚙️</span>
+            <span class="sidebar__label">Settings</span>
+        </a>
+    </li>
+
+    <li>
+        <a class="sidebar__link" href="login.html">
+            <span class="sidebar__icon" aria-hidden="true">🚪</span>
+            <span class="sidebar__label">Logout</span>
+        </a>
+    </li>
+</ul>
+</nav>
+
+  <!-- Page content -->
+<main class="main">
+<header class="page-shell">
+    <div class="page-shell__left">
+      <h1 class="page-shell__title">Asset Assignments</h1>
+      <div class="page-shell__subtitle">Manage asset allocation, returns, and track assignment history</div>
+    </div>
+    <div class="page-shell__actions"></div>
+  </header>
+
+<div class="assignments-page">
+<div class="assignments-container" style="color: #0b1220;">
+
+    <!-- Quick Stats -->
+    <section class="stats-bar">
+        <div class="stat-card">
+            <span class="stat-number">142</span>
+            <span class="stat-label">Total Assigned</span>
+        </div>
+        <div class="stat-card">
+            <span class="stat-number">28</span>
+            <span class="stat-label">Pending Returns</span>
+        </div>
+        <div class="stat-card">
+            <span class="stat-number">15</span>
+            <span class="stat-label">This Month</span>
+        </div>
+        <div class="stat-card">
+            <span class="stat-number">3</span>
+            <span class="stat-label">Overdue</span>
+        </div>
+    </section>
+
+    <!-- Main Content Grid -->
+    <div class="assignments-grid">
+
+        <!-- Assign Asset Section -->
+        <section class="card assign-asset-card">
+            <div class="card-header">
+                <h2><span class="icon">📤</span> Assign Asset to Employee</h2>
+            </div>
+            <div class="card-body">
+                <form id="assignAssetForm" class="assignment-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="assetSelect">Select Asset</label>
+                            <select id="assetSelect" name="asset_id" required>
+                                <option value="">-- Choose an asset --</option>
+                                <optgroup label="Laptops">
+                                    <option value="AST-001">AST-001 — Dell XPS 15 (Available)</option>
+                                    <option value="AST-002">AST-002 — MacBook Pro 14" (Available)</option>
+                                    <option value="AST-003">AST-003 — ThinkPad X1 Carbon (Available)</option>
+                                </optgroup>
+                                <optgroup label="Monitors">
+                                    <option value="AST-010">AST-010 — Dell U2723QE 27" (Available)</option>
+                                    <option value="AST-011">AST-011 — LG 32UN880 32" (Available)</option>
+                                </optgroup>
+                                <optgroup label="Peripherals">
+                                    <option value="AST-020">AST-020 — Logitech MX Keys (Available)</option>
+                                    <option value="AST-021">AST-021 — Apple Magic Keyboard (Available)</option>
+                                </optgroup>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="employeeSelect">Assign To</label>
+                            <select id="employeeSelect" name="employee_id" required>
+                                <option value="">-- Select employee --</option>
+                                <optgroup label="Engineering">
+                                    <option value="EMP-101">John Chen — Software Engineer</option>
+                                    <option value="EMP-102">Sarah Kim — DevOps Engineer</option>
+                                    <option value="EMP-103">Michael Torres — QA Lead</option>
+                                </optgroup>
+                                <optgroup label="Design">
+                                    <option value="EMP-201">Emily Zhang — UI Designer</option>
+                                    <option value="EMP-202">David Park — UX Researcher</option>
+                                </optgroup>
+                                <optgroup label="Operations">
+                                    <option value="EMP-301">Lisa Wang — HR Manager</option>
+                                    <option value="EMP-302">James Liu — Finance Analyst</option>
+                                </optgroup>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="assignmentDate">Assignment Date</label>
+                            <input type="date" id="assignmentDate" name="assignment_date" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="expectedReturn">Expected Return Date</label>
+                            <input type="date" id="expectedReturn" name="expected_return">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="assignmentNotes">Notes</label>
+                        <textarea id="assignmentNotes" name="notes" rows="3" placeholder="Optional notes about this assignment..."></textarea>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="reset" class="btn btn-secondary">Clear</button>
+                        <button type="submit" class="btn btn-primary">Assign Asset</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+        <!-- Return Asset Section -->
+        <section class="card return-asset-card">
+            <div class="card-header">
+                <h2><span class="icon">📥</span> Return Asset</h2>
+            </div>
+            <div class="card-body">
+                <form id="returnAssetForm" class="assignment-form">
+                    <div class="form-group">
+                        <label for="returnAssetSearch">Search Assigned Asset</label>
+                        <input type="text" id="returnAssetSearch" placeholder="Enter asset ID or employee name..." autocomplete="off">
+                    </div>
+
+                    <!-- Currently Assigned Assets List -->
+                    <div class="assigned-assets-list">
+                        <h4>Currently Assigned Assets</h4>
+                        <table class="mini-table">
+                            <thead>
+                                <tr>
+                                    <th>Asset</th>
+                                    <th>Assigned To</th>
+                                    <th>Since</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>AST-004</strong><br><small>MacBook Pro 16"</small></td>
+                                    <td>John Chen</td>
+                                    <td>2026-03-15</td>
+                                    <td><button type="button" class="btn btn-sm btn-return" data-asset="AST-004">Return</button></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>AST-012</strong><br><small>Dell Monitor 27"</small></td>
+                                    <td>Emily Zhang</td>
+                                    <td>2026-04-20</td>
+                                    <td><button type="button" class="btn btn-sm btn-return" data-asset="AST-012">Return</button></td>
+                                </tr>
+                                <tr class="overdue">
+                                    <td><strong>AST-022</strong><br><small>Logitech Webcam</small></td>
+                                    <td>Michael Torres</td>
+                                    <td>2025-11-10</td>
+                                    <td><button type="button" class="btn btn-sm btn-return" data-asset="AST-022">Return</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Return Details -->
+                    <div id="returnDetails" class="return-details hidden">
+                        <h4>Return Details</h4>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="returnDate">Return Date</label>
+                                <input type="date" id="returnDate" name="return_date" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="assetCondition">Condition</label>
+                                <select id="assetCondition" name="condition" required>
+                                    <option value="">-- Select condition --</option>
+                                    <option value="excellent">Excellent</option>
+                                    <option value="good">Good</option>
+                                    <option value="fair">Fair — Minor Issues</option>
+                                    <option value="damaged">Damaged — Needs Repair</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="returnNotes">Return Notes</label>
+                            <textarea id="returnNotes" name="return_notes" rows="2" placeholder="Condition details, damage notes, etc..."></textarea>
+                        </div>
+                        <div class="form-actions">
+                            <button type="button" class="btn btn-secondary" id="cancelReturn">Cancel</button>
+                            <button type="submit" class="btn btn-success">Confirm Return</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Assignment History Section -->
+    <section class="card history-card">
+        <div class="card-header">
+            <h2><span class="icon">📋</span> Assignment History</h2>
+            <div class="header-actions">
+                <input type="text" id="historySearch" class="search-input" placeholder="Search history...">
+                <select id="historyFilter" class="filter-select">
+                    <option value="all">All Types</option>
+                    <option value="assigned">Assignments</option>
+                    <option value="returned">Returns</option>
+                </select>
+                <button class="btn btn-outline" id="exportHistory">Export CSV</button>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="data-table" id="historyTable">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Type</th>
+                            <th>Asset ID</th>
+                            <th>Asset Name</th>
+                            <th>Employee</th>
+                            <th>Department</th>
+                            <th>Status</th>
+                            <th>Notes</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>2026-06-24</td>
+                            <td><span class="badge badge-assigned">Assigned</span></td>
+                            <td>AST-005</td>
+                            <td>Dell XPS 13</td>
+                            <td>Sarah Kim</td>
+                            <td>Engineering</td>
+                            <td><span class="status status-active">Active</span></td>
+                            <td>New hire onboarding</td>
+                            <td><button class="btn btn-xs btn-view">View</button></td>
+                        </tr>
+                        <tr>
+                            <td>2026-06-22</td>
+                            <td><span class="badge badge-returned">Returned</span></td>
+                            <td>AST-015</td>
+                            <td>HP Monitor 24"</td>
+                            <td>David Park</td>
+                            <td>Design</td>
+                            <td><span class="status status-completed">Completed</span></td>
+                            <td>Upgraded to 27" model</td>
+                            <td><button class="btn btn-xs btn-view">View</button></td>
+                        </tr>
+                        <tr>
+                            <td>2026-06-20</td>
+                            <td><span class="badge badge-assigned">Assigned</span></td>
+                            <td>AST-030</td>
+                            <td>Standing Desk</td>
+                            <td>Lisa Wang</td>
+                            <td>Operations</td>
+                            <td><span class="status status-active">Active</span></td>
+                            <td>Ergonomic request approved</td>
+                            <td><button class="btn btn-xs btn-view">View</button></td>
+                        </tr>
+                        <tr>
+                            <td>2026-06-18</td>
+                            <td><span class="badge badge-assigned">Assigned</span></td>
+                            <td>AST-004</td>
+                            <td>MacBook Pro 16"</td>
+                            <td>John Chen</td>
+                            <td>Engineering</td>
+                            <td><span class="status status-active">Active</span></td>
+                            <td>Development machine</td>
+                            <td><button class="btn btn-xs btn-view">View</button></td>
+                        </tr>
+                        <tr>
+                            <td>2026-06-15</td>
+                            <td><span class="badge badge-returned">Returned</span></td>
+                            <td>AST-008</td>
+                            <td>ThinkPad T14</td>
+                            <td>James Liu</td>
+                            <td>Operations</td>
+                            <td><span class="status status-completed">Completed</span></td>
+                            <td>Employee offboarding</td>
+                            <td><button class="btn btn-xs btn-view">View</button></td>
+                        </tr>
+                        <tr>
+                            <td>2026-06-10</td>
+                            <td><span class="badge badge-assigned">Assigned</span></td>
+                            <td>AST-012</td>
+                            <td>Dell Monitor 27"</td>
+                            <td>Emily Zhang</td>
+                            <td>Design</td>
+                            <td><span class="status status-active">Active</span></td>
+                            <td>Color-accurate display for design work</td>
+                            <td><button class="btn btn-xs btn-view">View</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Pagination -->
+            <div class="pagination">
+                <button class="btn btn-sm" disabled>&laquo; Previous</button>
+                <span class="page-info">Page 1 of 12 — Showing 1-6 of 68 records</span>
+                <button class="btn btn-sm">Next &raquo;</button>
+            </div>
+        </div>
+    </section>
+
+</div>
+
+<!-- Return Confirmation Modal -->
+<div id="returnModal" class="modal hidden">
+    <div class="modal-overlay"></div>
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3>Confirm Asset Return</h3>
+            <button class="modal-close">&times;</button>
+        </div>
+        <div class="modal-body">
+            <p>Are you sure you want to process the return for:</p>
+            <div class="modal-asset-info">
+                <strong id="modalAssetId">AST-004</strong> — <span id="modalAssetName">MacBook Pro 16"</span>
+                <br>
+                <small>Currently assigned to: <span id="modalEmployeeName">John Chen</span></small>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-secondary modal-cancel">Cancel</button>
+            <button class="btn btn-success modal-confirm">Confirm Return</button>
+        </div>
+    </div>
+</div>
+
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Set default date to today
+    const today = new Date().toISOString().split('T')[0];
+    document.getElementById('assignmentDate').value = today;
+    document.getElementById('returnDate').value = today;
+
+    // Assign Asset Form Submit
+    document.getElementById('assignAssetForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        // Add your assignment logic here
+        alert('Asset assigned successfully!');
+        this.reset();
+        document.getElementById('assignmentDate').value = today;
+    });
+
+    // Return buttons in mini table
+    document.querySelectorAll('.btn-return').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const assetId = this.dataset.asset;
+            document.getElementById('returnDetails').classList.remove('hidden');
+            this.closest('tr').classList.add('selected');
+        });
+    });
+
+    // Cancel return
+    document.getElementById('cancelReturn').addEventListener('click', function() {
+        document.getElementById('returnDetails').classList.add('hidden');
+        document.querySelectorAll('.mini-table tr.selected').forEach(tr => tr.classList.remove('selected'));
+    });
+
+    // Return Asset Form Submit
+    document.getElementById('returnAssetForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        // Add your return logic here
+        alert('Asset returned successfully!');
+        document.getElementById('returnDetails').classList.add('hidden');
+    });
+
+    // History search
+    document.getElementById('historySearch').addEventListener('input', function() {
+        const searchTerm = this.value.toLowerCase();
+        document.querySelectorAll('#historyTable tbody tr').forEach(row => {
+            const text = row.textContent.toLowerCase();
+            row.style.display = text.includes(searchTerm) ? '' : 'none';
+        });
+    });
+
+    // History filter
+    document.getElementById('historyFilter').addEventListener('change', function() {
+        const filter = this.value;
+        document.querySelectorAll('#historyTable tbody tr').forEach(row => {
+            if (filter === 'all') {
+                row.style.display = '';
+            } else {
+                const badge = row.querySelector('.badge');
+                const type = badge.classList.contains('badge-assigned') ? 'assigned' : 'returned';
+                row.style.display = type === filter ? '' : 'none';
+            }
+        });
+    });
+
+    // Export button
+    document.getElementById('exportHistory').addEventListener('click', function() {
+        alert('Export functionality would generate a CSV file of the assignment history.');
+    });
+});
+</script>
+
+  </main>
+</body>
+</html>

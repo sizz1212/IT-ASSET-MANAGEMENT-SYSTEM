@@ -1,0 +1,259 @@
+/* ============================================================
+   Growth — Global theme tokens + primitives
+   Deep teal sidebar + light content canvas
+   Fonts: Plus Jakarta Sans (headings), Inter (body), IBM Plex Mono (data)
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+
+/* Global resets + base typography */
+html {
+  font-size: 16px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  /* Brand ramp (deep teal -> bright teal) */
+  --brand-900: #0A2E33; /* deep */
+  --brand-850: #0B3740;
+  --brand-800: #0B4F6B;
+  --brand-700: #0F5C57;
+  --brand-600: #0D9488;
+  --brand-500: #14B8A6;
+  --brand-400: #38BDF8;
+  --brand-300: #67E8F9;
+
+  /* Semantic status */
+  --success: #16A34A;
+  --success-bg: #ECFDF5;
+
+  --info: #0891B2;
+  --info-bg: #ECFEFF;
+
+  --warning: #D97706;
+  --warning-bg: #FFFBEB;
+
+  --danger: #DC2626;
+  --danger-bg: #FEF2F2;
+
+  /* Surfaces & ink (content canvas is light) */
+  --canvas: #F4F7F7;
+  --surface: #FFFFFF;
+  --surface-soft: rgba(255, 255, 255, 0.78);
+
+  --ink: #0F172A;
+  --ink-muted: #475569;
+  --ink-soft: #64748B;
+
+  --line: rgba(15, 23, 42, 0.12);
+  --line-strong: rgba(15, 23, 42, 0.18);
+
+  --radius-sm: 10px;
+  --radius-md: 14px;
+  --radius-lg: 18px;
+
+  --shadow-sm: 0 6px 20px rgba(2, 8, 23, 0.08);
+  --shadow-md: 0 18px 45px rgba(2, 8, 23, 0.12);
+
+  --font-head: 'Plus Jakarta Sans', 'Inter', system-ui, sans-serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--ink);
+  background: radial-gradient(circle at top left, rgba(8, 145, 178, 0.10), transparent 28%),
+              radial-gradient(circle at bottom right, rgba(13, 148, 136, 0.10), transparent 28%),
+              var(--canvas);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Sidebar-shell pages keep existing layout.css background/ink.
+   This file sets the content defaults. */
+.main {
+  flex: 1;
+  width: 100%;
+  max-width: none;
+  min-width: 0;
+  padding: 30px 24px;
+}
+
+/* Typography helpers */
+.h1, h1 { font-family: var(--font-head); }
+.h2, h2 { font-family: var(--font-head); }
+.h3, h3 { font-family: var(--font-head); }
+
+.heading {
+  font-family: var(--font-head);
+  letter-spacing: -0.02em;
+}
+
+.mono {
+  font-family: var(--font-mono);
+}
+
+.data,
+.kpi-number,
+.table-mono,
+.code {
+  font-family: var(--font-mono);
+}
+
+/* Links */
+a {
+  color: inherit;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+/* Shared surfaces */
+.card,
+.table-card,
+.content-panel {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 16px;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 13.5px;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease, border-color 0.15s ease;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--brand-600) 0%, var(--brand-500) 100%);
+  color: #fff;
+  border-color: rgba(13, 148, 136, 0.35);
+  box-shadow: 0 10px 22px rgba(13, 148, 136, 0.22);
+}
+
+.btn-primary:hover {
+  box-shadow: 0 16px 34px rgba(13, 148, 136, 0.28);
+}
+
+.btn-outline {
+  background: transparent;
+  border-color: rgba(13, 148, 136, 0.35);
+  color: var(--brand-700);
+}
+
+.btn-outline:hover {
+  background: rgba(13, 148, 136, 0.06);
+  border-color: rgba(13, 148, 136, 0.55);
+}
+
+.btn-danger {
+  background: linear-gradient(135deg, #DC2626 0%, #F43F5E 100%);
+  color: #fff;
+  border-color: rgba(220, 38, 38, 0.35);
+  box-shadow: 0 10px 22px rgba(244, 63, 94, 0.18);
+}
+
+.btn-danger:hover {
+  box-shadow: 0 16px 34px rgba(244, 63, 94, 0.26);
+}
+
+/* Status badges (semantic) */
+.badge,
+.status {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-weight: 800;
+  font-size: 12px;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.badge--success,
+.status--success {
+  background: var(--success-bg);
+  color: var(--success);
+  border: 1px solid rgba(22, 163, 74, 0.25);
+}
+
+.badge--info,
+.status--info {
+  background: var(--info-bg);
+  color: var(--info);
+  border: 1px solid rgba(8, 145, 178, 0.25);
+}
+
+.badge--warning,
+.status--warning {
+  background: var(--warning-bg);
+  color: var(--warning);
+  border: 1px solid rgba(217, 119, 6, 0.25);
+}
+
+.badge--danger,
+.status--danger {
+  background: var(--danger-bg);
+  color: var(--danger);
+  border: 1px solid rgba(220, 38, 38, 0.25);
+}
+
+/* Back-compat aliases used by existing pages */
+.status.good { background: rgba(13, 148, 136, 0.16); color: var(--brand-600); border: 1px solid rgba(13, 148, 136, 0.22); }
+.status.warn { background: rgba(245, 158, 11, 0.16); color: var(--warning); border: 1px solid rgba(245, 158, 11, 0.22); }
+.status.good,
+.status.warn,
+.status.info { font-family: var(--font-body); }
+
+/* Flash messages (Bootstrap alerts) */
+.flash-messages .alert {
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(15, 23, 42, 0.10);
+}
+
+/* Tables: light chrome defaults */
+.table-card table,
+.table-card .table,
+table {
+  border-collapse: collapse;
+}
+
+th {
+  font-family: var(--font-head);
+}
+
+/* Make sure data-ish cells use monospaced font when possible */
+[data-mono],
+.cell-mono,
+td.mono,
+th.mono {
+  font-family: var(--font-mono) !important;
+}
+

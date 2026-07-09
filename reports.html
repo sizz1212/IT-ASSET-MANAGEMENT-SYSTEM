@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reports</title>
+<link rel="stylesheet" href="static/css/reports.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link rel="stylesheet" href="static/css/style.css">
+<link rel="stylesheet" href="static/css/layout.css">
+<link rel="stylesheet" href="static/css/responsive-tweaks.css">
+<script src="static/js/layout.js"></script>
+</head>
+<body>
+
+  <!-- Shared layout + sidebar (pure front-end) -->
+<!-- Side Bar -->
+<nav class="sidebar" aria-label="Main navigation">
+    <div class="sidebar__brand">
+        <div class="sidebar__logo" aria-hidden="true">IT</div>
+        <div class="sidebar__brand-text">
+            <div class="sidebar__brand-name">IT Asset</div>
+            <div class="sidebar__brand-sub">Management System</div>
+        </div>
+    </div>
+
+<ul class="sidebar__nav">
+    <li>
+        <a class="sidebar__link" href="index.html">
+            <span class="sidebar__icon" aria-hidden="true">📊</span>
+            <span class="sidebar__label">Dashboard</span>
+        </a>
+    </li>
+
+    <li>
+        <a class="sidebar__link" href="assets.html">
+            <span class="sidebar__icon" aria-hidden="true">🧩</span>
+            <span class="sidebar__label">Assets</span>
+        </a>
+    </li>
+
+    <li>
+        <a class="sidebar__link" href="employees.html">
+            <span class="sidebar__icon" aria-hidden="true">👥</span>
+            <span class="sidebar__label">Employees</span>
+        </a>
+    </li>
+
+    <li>
+        <a class="sidebar__link" href="assignments.html">
+            <span class="sidebar__icon" aria-hidden="true">🧾</span>
+            <span class="sidebar__label">Assignments</span>
+        </a>
+    </li>
+
+    <li>
+        <a class="sidebar__link" href="maintenance.html">
+            <span class="sidebar__icon" aria-hidden="true">🛠️</span>
+            <span class="sidebar__label">Maintenance</span>
+        </a>
+    </li>
+
+    <li>
+        <a class="sidebar__link" href="reports.html">
+            <span class="sidebar__icon" aria-hidden="true">📈</span>
+            <span class="sidebar__label">Reports</span>
+        </a>
+    </li>
+
+    <li>
+        <a class="sidebar__link" href="settings.html">
+            <span class="sidebar__icon" aria-hidden="true">⚙️</span>
+            <span class="sidebar__label">Settings</span>
+        </a>
+    </li>
+
+    <li>
+        <a class="sidebar__link" href="login.html">
+            <span class="sidebar__icon" aria-hidden="true">🚪</span>
+            <span class="sidebar__label">Logout</span>
+        </a>
+    </li>
+</ul>
+</nav>
+
+  <!-- Page content -->
+<main class="main">
+    <header class="page-shell">
+    <div class="page-shell__left">
+      <h1 class="page-shell__title">Reports</h1>
+      <div class="page-shell__subtitle">Generate and export detailed reports on assets, assignments, and maintenance.</div>
+    </div>
+    <div class="page-shell__actions"></div>
+  </header>
+
+<div class="page-wrapper">
+
+  <!-- Report Cards Grid -->
+  <div class="reports-grid">
+
+    <!-- Asset Report -->
+    <div class="report-card" id="assetReportCard">
+      <div class="report-card__icon report-card__icon--asset">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-4 0v2"/><line x1="12" y1="12" x2="12" y2="16"/><line x1="10" y1="14" x2="14" y2="14"/></svg>
+      </div>
+      <div class="report-card__content">
+        <h2 class="report-card__title">Asset Report</h2>
+        <p class="report-card__desc">A full inventory snapshot — all assets, their categories, condition, acquisition cost, and current status.</p>
+        <ul class="report-card__includes">
+          <li>Asset ID, name, and category</li>
+          <li>Acquisition date and cost</li>
+          <li>Current condition and location</li>
+          <li>Depreciation summary</li>
+        </ul>
+      </div>
+      <div class="report-card__actions">
+        <button class="btn btn--outline" onclick="openFilterModal('asset')">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
+          Filter
+        </button>
+        <button class="btn btn--primary" onclick="openPreviewModal('asset')">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+          Preview
+        </button>
+        <button class="btn btn--export" onclick="exportReport('asset')">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Export
+        </button>
+      </div>
+    </div>
+
+    <!-- Assignment Report -->
+    <div class="report-card" id="assignmentReportCard">
+      <div class="report-card__icon report-card__icon--assign">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+      </div>
+      <div class="report-card__content">
+        <h2 class="report-card__title">Assignment Report</h2>
+        <p class="report-card__desc">Track which assets are assigned to whom, for how long, and identify unassigned or overdue returns.</p>
+        <ul class="report-card__includes">
+          <li>Assigned asset and assignee</li>
+          <li>Assignment and return dates</li>
+          <li>Department and location</li>
+          <li>Overdue and unassigned assets</li>
+        </ul>
+      </div>
+      <div class="report-card__actions">
+        <button class="btn btn--outline" onclick="openFilterModal('assignment')">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
+          Filter
+        </button>
+        <button class="btn btn--primary" onclick="openPreviewModal('assignment')">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+          Preview
+        </button>
+        <button class="btn btn--export" onclick="exportReport('assignment')">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Export
+        </button>
+      </div>
+    </div>
+
+    <!-- Maintenance Report -->
+    <div class="report-card" id="maintenanceReportCard">
+      <div class="report-card__icon report-card__icon--maint">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+      </div>
+      <div class="report-card__content">
+        <h2 class="report-card__title">Maintenance Report</h2>
+        <p class="report-card__desc">A history of all maintenance activities — completed, in-progress, and pending — with cost and time data.</p>
+        <ul class="report-card__includes">
+          <li>Maintenance type and description</li>
+          <li>Scheduled vs. actual dates</li>
+          <li>Status and assigned technician</li>
+          <li>Cost and duration breakdown</li>
+        </ul>
+      </div>
+      <div class="report-card__actions">
+        <button class="btn btn--outline" onclick="openFilterModal('maintenance')">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
+          Filter
+        </button>
+        <button class="btn btn--primary" onclick="openPreviewModal('maintenance')">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+          Preview
+        </button>
+        <button class="btn btn--export" onclick="exportReport('maintenance')">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Export
+        </button>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Recent Exports -->
+  <div class="content-panel">
+    <div class="panel-header">
+      <h2 class="panel-header__title">Recent Exports</h2>
+    </div>
+    <div class="table-wrapper">
+      <table class="maint-table">
+        <thead>
+          <tr>
+            <th>Report Name</th>
+            <th>Type</th>
+            <th>Generated By</th>
+            <th>Date</th>
+            <th>Format</th>
+            <th>Download</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>All Assets — June 2025</td>
+            <td><span class="type-pill type-pill--asset">Asset</span></td>
+            <td>Admin</td>
+            <td>Jun 20, 2025</td>
+            <td>CSV</td>
+            <td><button class="action-btn" title="Download"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></button></td>
+          </tr>
+          <tr>
+            <td>IT Dept Assignments Q2</td>
+            <td><span class="type-pill type-pill--assign">Assignment</span></td>
+            <td>IT Manager</td>
+            <td>Jun 15, 2025</td>
+            <td>PDF</td>
+            <td><button class="action-btn" title="Download"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></button></td>
+          </tr>
+          <tr>
+            <td>Maintenance History — H1 2025</td>
+            <td><span class="type-pill type-pill--maint">Maintenance</span></td>
+            <td>Admin</td>
+            <td>Jun 10, 2025</td>
+            <td>CSV</td>
+            <td><button class="action-btn" title="Download"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- ── FILTER MODAL ── -->
+<div class="modal-overlay" id="filterModal">
+  <div class="modal modal--sm">
+    <div class="modal__header">
+      <h3 class="modal__title" id="filterModalTitle">Filter Report</h3>
+      <button class="modal__close" id="closeFilterModal">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="modal__body">
+      <div class="form-grid">
+        <div class="form-group">
+          <label class="form-label">Date From</label>
+          <input type="date" class="form-control">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Date To</label>
+          <input type="date" class="form-control">
+        </div>
+        <div class="form-group form-group--full">
+          <label class="form-label">Department</label>
+          <select class="form-control">
+            <option value="">All Departments</option>
+            <option>IT</option>
+            <option>Facilities</option>
+            <option>Operations</option>
+            <option>HR</option>
+          </select>
+        </div>
+        <div class="form-group form-group--full">
+          <label class="form-label">Export Format</label>
+          <div class="format-toggle">
+            <label class="format-opt">
+              <input type="radio" name="format" value="csv" checked> CSV
+            </label>
+            <label class="format-opt">
+              <input type="radio" name="format" value="pdf"> PDF
+            </label>
+            <label class="format-opt">
+              <input type="radio" name="format" value="xlsx"> Excel
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal__footer">
+      <button class="btn btn--ghost" id="cancelFilterModal">Cancel</button>
+      <button class="btn btn--primary">Apply & Generate</button>
+    </div>
+  </div>
+</div>
+
+<!-- ── PREVIEW MODAL ── -->
+<div class="modal-overlay" id="previewModal">
+  <div class="modal modal--lg">
+    <div class="modal__header">
+      <h3 class="modal__title" id="previewModalTitle">Report Preview</h3>
+      <button class="modal__close" id="closePreviewModal">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="modal__body">
+      <div class="preview-banner">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        Showing first 5 rows. Export to view the full report.
+      </div>
+      <div class="table-wrapper">
+        <table class="maint-table" id="previewTable">
+          <thead id="previewHead"></thead>
+          <tbody id="previewBody"></tbody>
+        </table>
+      </div>
+    </div>
+    <div class="modal__footer">
+      <button class="btn btn--ghost" id="cancelPreviewModal">Close</button>
+      <button class="btn btn--export" id="exportFromPreview">
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Export Full Report
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<script>
+  const previewData = {
+    asset: {
+      title: 'Asset Report Preview',
+      headers: ['Asset ID', 'Name', 'Category', 'Condition', 'Location', 'Cost'],
+      rows: [
+        ['AST-001','Server Rack A','IT Equipment','Good','Data Center','₱120,000'],
+        ['AST-004','HVAC Unit 2','Facilities','Fair','3rd Floor','₱85,000'],
+        ['AST-007','Generator B','Utilities','Good','Basement','₱200,000'],
+        ['AST-012','Laptop Fleet C','IT Equipment','Fair','IT Dept','₱360,000'],
+        ['AST-015','Office Chairs (20)','Furniture','Good','Main Office','₱40,000'],
+      ]
+    },
+    assignment: {
+      title: 'Assignment Report Preview',
+      headers: ['Asset', 'Assignee', 'Department', 'Assigned Date', 'Return Date', 'Status'],
+      rows: [
+        ['AST-001','John Dela Cruz','IT','Jan 10, 2025','—','Active'],
+        ['AST-003','Maria Santos','HR','Mar 05, 2025','Jun 30, 2025','Active'],
+        ['AST-009','Carlo Reyes','Operations','Nov 20, 2024','Feb 28, 2025','Returned'],
+        ['AST-012','IT Department','IT','Apr 01, 2025','—','Active'],
+        ['AST-016','Ana Flores','Finance','May 12, 2025','May 31, 2025','Overdue'],
+      ]
+    },
+    maintenance: {
+      title: 'Maintenance Report Preview',
+      headers: ['Asset', 'Type', 'Description', 'Scheduled', 'Status', 'Technician'],
+      rows: [
+        ['AST-001','Preventive','Quarterly hardware inspection','Jun 10, 2025','Completed','John DC'],
+        ['AST-004','Corrective','Refrigerant leak repair','Jun 18, 2025','In Progress','Maria S'],
+        ['AST-007','Preventive','Monthly oil change','Jun 25, 2025','Pending','—'],
+        ['AST-012','Corrective','Battery replacement (12 units)','Jul 02, 2025','Pending','IT Dept'],
+        ['AST-015','Preventive','Annual inspection','Jul 10, 2025','Pending','Facilities'],
+      ]
+    }
+  };
+
+  let currentType = '';
+
+  function openModal(id)  { document.getElementById(id).classList.add('is-open'); }
+  function closeModal(id) { document.getElementById(id).classList.remove('is-open'); }
+
+  document.getElementById('closeFilterModal').addEventListener('click', () => closeModal('filterModal'));
+  document.getElementById('cancelFilterModal').addEventListener('click', () => closeModal('filterModal'));
+  document.getElementById('closePreviewModal').addEventListener('click', () => closeModal('previewModal'));
+  document.getElementById('cancelPreviewModal').addEventListener('click', () => closeModal('previewModal'));
+
+  document.querySelectorAll('.modal-overlay').forEach(o => {
+    o.addEventListener('click', e => { if (e.target === o) o.classList.remove('is-open'); });
+  });
+
+  function openFilterModal(type) {
+    currentType = type;
+    const labels = { asset: 'Asset', assignment: 'Assignment', maintenance: 'Maintenance' };
+    document.getElementById('filterModalTitle').textContent = `Filter — ${labels[type]} Report`;
+    openModal('filterModal');
+  }
+
+  function openPreviewModal(type) {
+    currentType = type;
+    const data = previewData[type];
+    document.getElementById('previewModalTitle').textContent = data.title;
+    document.getElementById('previewHead').innerHTML = `<tr>${data.headers.map(h => `<th>${h}</th>`).join('')}</tr>`;
+    document.getElementById('previewBody').innerHTML = data.rows.map(r => `<tr>${r.map(c => `<td>${c}</td>`).join('')}</tr>`).join('');
+    openModal('previewModal');
+  }
+
+  function exportReport(type) {
+    showToast(`Exporting ${type} report…`);
+  }
+
+  document.getElementById('exportFromPreview').addEventListener('click', () => {
+    exportReport(currentType);
+    closeModal('previewModal');
+  });
+
+  function showToast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('is-visible');
+    setTimeout(() => t.classList.remove('is-visible'), 3000);
+  }
+</script>
+
+</main>
+
+</body>
+</html>

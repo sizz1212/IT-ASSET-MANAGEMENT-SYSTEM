@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Assets | Growth</title>
+<link rel="stylesheet" href="static/css/asset.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link rel="stylesheet" href="static/css/style.css">
+<link rel="stylesheet" href="static/css/layout.css">
+<link rel="stylesheet" href="static/css/responsive-tweaks.css">
+<script src="static/js/layout.js"></script>
+</head>
+<body>
+<!-- Side Bar -->
+<nav class="sidebar" aria-label="Main navigation">
+    <div class="sidebar__brand">
+        <div class="sidebar__logo" aria-hidden="true">IT</div>
+        <div class="sidebar__brand-text">
+            <div class="sidebar__brand-name">IT Asset</div>
+            <div class="sidebar__brand-sub">Management System</div>
+        </div>
+    </div>
+
+<ul class="sidebar__nav">
+    <li>
+        <a class="sidebar__link" href="index.html">
+            <span class="sidebar__icon" aria-hidden="true">📊</span>
+            <span class="sidebar__label">Dashboard</span>
+        </a>
+    </li>
+
+    <li>
+        <a class="sidebar__link" href="assets.html">
+            <span class="sidebar__icon" aria-hidden="true">🧩</span>
+            <span class="sidebar__label">Assets</span>
+        </a>
+    </li>
+
+    <li>
+        <a class="sidebar__link" href="employees.html">
+            <span class="sidebar__icon" aria-hidden="true">👥</span>
+            <span class="sidebar__label">Employees</span>
+        </a>
+    </li>
+
+    <li>
+        <a class="sidebar__link" href="assignments.html">
+            <span class="sidebar__icon" aria-hidden="true">🧾</span>
+            <span class="sidebar__label">Assignments</span>
+        </a>
+    </li>
+
+    <li>
+        <a class="sidebar__link" href="maintenance.html">
+            <span class="sidebar__icon" aria-hidden="true">🛠️</span>
+            <span class="sidebar__label">Maintenance</span>
+        </a>
+    </li>
+
+    <li>
+        <a class="sidebar__link" href="reports.html">
+            <span class="sidebar__icon" aria-hidden="true">📈</span>
+            <span class="sidebar__label">Reports</span>
+        </a>
+    </li>
+
+    <li>
+        <a class="sidebar__link" href="settings.html">
+            <span class="sidebar__icon" aria-hidden="true">⚙️</span>
+            <span class="sidebar__label">Settings</span>
+        </a>
+    </li>
+
+    <li>
+        <a class="sidebar__link" href="login.html">
+            <span class="sidebar__icon" aria-hidden="true">🚪</span>
+            <span class="sidebar__label">Logout</span>
+        </a>
+    </li>
+</ul>
+</nav>
+
+  <!-- Page content -->
+  <main class="main">
+    <header class="page-shell page-shell--assets">
+    <div class="page-shell__accent" aria-hidden="true">
+      <div class="page-shell__breadcrumbs breadcrumb">
+      </div>
+      <h1 class="page-shell__title">Assets</h1>
+      <div class="page-shell__subtitle">Monitor, assign, and maintain all company assets in one place.</div>
+    </div>
+    <div class="page-shell__actions">
+      <button class="btn-export" onclick="exportCSV()">
+        <i class="fa-solid fa-arrow-up-from-bracket"></i> Export
+      </button>
+      <button class="btn-primary" onclick="openModal('add')">
+        <i class="fa-solid fa-plus"></i> New Asset
+      </button>
+    </div>
+  </header>
+
+    <!-- KPI Row -->
+    <div class="kpi-row">
+        <div class="kpi-card">
+            <div class="kpi-left">
+                <p class="kpi-label">Total Assets</p>
+                <h2 class="kpi-value" id="kpi-total">0</h2>
+                <p class="kpi-sub">All registered</p>
+            </div>
+            <div class="kpi-icon-wrap kpi-blue">
+                <i class="fa-solid fa-layer-group"></i>
+            </div>
+        </div>
+        <div class="kpi-card">
+            <div class="kpi-left">
+                <p class="kpi-label">Available</p>
+                <h2 class="kpi-value kpi-green" id="kpi-available">0</h2>
+                <p class="kpi-sub">Ready to assign</p>
+            </div>
+            <div class="kpi-icon-wrap kpi-icon-green">
+                <i class="fa-solid fa-circle-check"></i>
+            </div>
+        </div>
+        <div class="kpi-card">
+            <div class="kpi-left">
+                <p class="kpi-label">Assigned</p>
+                <h2 class="kpi-value kpi-cyan" id="kpi-assigned">0</h2>
+                <p class="kpi-sub">Currently in use</p>
+            </div>
+            <div class="kpi-icon-wrap kpi-icon-cyan">
+                <i class="fa-solid fa-user-check"></i>
+            </div>
+        </div>
+        <div class="kpi-card">
+            <div class="kpi-left">
+                <p class="kpi-label">Maintenance</p>
+                <h2 class="kpi-value kpi-amber" id="kpi-maintenance">0</h2>
+                <p class="kpi-sub">Being serviced</p>
+            </div>
+            <div class="kpi-icon-wrap kpi-icon-amber">
+                <i class="fa-solid fa-screwdriver-wrench"></i>
+            </div>
+        </div>
+    </div>
+
+    <!-- Table Section -->
+    <div class="table-section">
+
+        <!-- Toolbar -->
+        <div class="toolbar">
+            <div class="toolbar-left">
+                <div class="search-wrap">
+                    <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                    <input
+                        type="text"
+                        id="searchInput"
+                        class="search-input"
+                        placeholder="Search by name, serial, or person…"
+                        oninput="filterAssets()"
+                    >
+                    <button class="search-clear" id="searchClear" onclick="clearSearch()" style="display:none;">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="toolbar-right">
+                <div class="filter-pill-group">
+                    <button class="filter-pill active" data-status="" onclick="setPillFilter(this, '')">All</button>
+                    <button class="filter-pill" data-status="Available" onclick="setPillFilter(this, 'Available')">Available</button>
+                    <button class="filter-pill" data-status="Assigned" onclick="setPillFilter(this, 'Assigned')">Assigned</button>
+                    <button class="filter-pill" data-status="Maintenance" onclick="setPillFilter(this, 'Maintenance')">Maintenance</button>
+                </div>
+                <select id="filterCategory" class="select-filter" onchange="filterAssets()">
+                    <option value="">All Categories</option>
+                    <option value="Electronics">Electronics</option>
+                    <option value="Furniture">Furniture</option>
+                    <option value="Vehicle">Vehicle</option>
+                    <option value="Equipment">Equipment</option>
+                    <option value="Software">Software</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Table -->
+        <div class="table-card">
+            <div class="table-meta">
+                <span class="table-meta-count" id="assetCount">— assets</span>
+                <span class="table-meta-hint">Click a row to preview</span>
+            </div>
+            <div class="table-wrap">
+                <table id="assetTable">
+                    <thead>
+                        <tr>
+                            <th class="col-num">#</th>
+                            <th>Asset Name</th>
+                            <th>Category</th>
+                            <th>Serial No.</th>
+                            <th>Assigned To</th>
+                            <th>Purchase Date</th>
+                            <th>Value</th>
+                            <th>Status</th>
+                            <th class="col-actions">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="assetBody"></tbody>
+                </table>
+
+                <div class="empty-state" id="emptyState" style="display:none;">
+                    <div class="empty-icon"><i class="fa-solid fa-box-open"></i></div>
+                    <p class="empty-title">No assets found</p>
+                    <p class="empty-sub">Try a different search term or filter, or add your first asset.</p>
+                    <button class="btn-primary" style="margin-top:16px;" onclick="openModal('add')">
+                        <i class="fa-solid fa-plus"></i> Add Asset
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+<!-- Add/Edit Modal -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModalOutside(event)">
+    <div class="modal">
+        <div class="modal-header">
+            <div>
+                <p class="modal-eyebrow" id="modalEyebrow">NEW ASSET</p>
+                <h3 class="modal-title" id="modalTitle">Add Asset</h3>
+            </div>
+            <button class="modal-close" onclick="closeModal()">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="form-grid">
+                <div class="form-group">
+                    <label class="form-label">Asset Name <span class="req">*</span></label>
+                    <input class="form-input" type="text" id="f-name" placeholder="e.g. MacBook Pro 14">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Category <span class="req">*</span></label>
+                    <select class="form-input" id="f-category">
+                        <option value="">Select category</option>
+                        <option>Electronics</option>
+                        <option>Furniture</option>
+                        <option>Vehicle</option>
+                        <option>Equipment</option>
+                        <option>Software</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Serial Number <span class="req">*</span></label>
+                    <input class="form-input" type="text" id="f-serial" placeholder="e.g. SN-2024-00123">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Assigned To</label>
+                    <input class="form-input" type="text" id="f-assigned" placeholder="Leave blank if unassigned">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Purchase Date</label>
+                    <input class="form-input" type="date" id="f-date">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Value / Cost (₱)</label>
+                    <input class="form-input" type="number" id="f-value" placeholder="e.g. 75000" min="0">
+                </div>
+                <div class="form-group form-full">
+                    <label class="form-label">Status <span class="req">*</span></label>
+                    <div class="status-radio-group">
+                        <label class="status-radio">
+                            <input type="radio" name="f-status" value="Available">
+                            <span class="radio-pill available">Available</span>
+                        </label>
+                        <label class="status-radio">
+                            <input type="radio" name="f-status" value="Assigned">
+                            <span class="radio-pill assigned">Assigned</span>
+                        </label>
+                        <label class="status-radio">
+                            <input type="radio" name="f-status" value="Maintenance">
+                            <span class="radio-pill maintenance">Maintenance</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-error" id="formError" style="display:none;">
+                <i class="fa-solid fa-circle-exclamation"></i>
+                <span id="formErrorMsg"></span>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn-ghost" onclick="closeModal()">Cancel</button>
+            <button class="btn-primary" id="saveBtn" onclick="saveAsset()">
+                <i class="fa-solid fa-floppy-disk"></i> Save Asset
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- Delete Modal -->
+<div class="modal-overlay" id="deleteOverlay" onclick="closeDeleteOutside(event)">
+    <div class="modal modal-sm">
+        <div class="modal-header">
+            <div>
+                <p class="modal-eyebrow danger-eyebrow">IRREVERSIBLE ACTION</p>
+                <h3 class="modal-title">Delete Asset</h3>
+            </div>
+            <button class="modal-close" onclick="closeDelete()">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="delete-body">
+                <div class="delete-icon-wrap">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                </div>
+                <p class="delete-msg">You are about to permanently delete</p>
+                <p class="delete-asset-name" id="deleteAssetName"></p>
+                <p class="delete-warning">This cannot be undone. All data associated with this asset will be lost.</p>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn-ghost" onclick="closeDelete()">Keep Asset</button>
+            <button class="btn-danger" onclick="confirmDelete()">
+                <i class="fa-solid fa-trash"></i> Delete
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- Toast -->
+<div class="toast-wrap" id="toastWrap"></div>
+
+<script>
+// ── Data (front-end only mock data, replaces server-rendered "assets") ──
+let assets = [
+    { id: 1, name: "MacBook Pro 14",        category: "Electronics", serial: "SN-2024-00123", assigned: "John Chen",      date: "2024-03-15", value: 95000, status: "Assigned" },
+    { id: 2, name: "Dell XPS 15",           category: "Electronics", serial: "SN-2024-00124", assigned: "",               date: "2024-02-10", value: 78000, status: "Available" },
+    { id: 3, name: "Standing Desk",         category: "Furniture",   serial: "SN-2023-00810", assigned: "Lisa Wang",      date: "2023-11-05", value: 15000, status: "Assigned" },
+    { id: 4, name: "Toyota Hiace",          category: "Vehicle",     serial: "SN-2022-00021", assigned: "",               date: "2022-06-01", value: 1200000, status: "Maintenance" },
+    { id: 5, name: "Logitech Webcam",       category: "Equipment",   serial: "SN-2024-00301", assigned: "Michael Torres", date: "2024-01-20", value: 3500, status: "Assigned" },
+    { id: 6, name: "Adobe Creative Suite",  category: "Software",    serial: "SN-2024-00500", assigned: "Emily Zhang",    date: "2024-04-01", value: 25000, status: "Assigned" },
+    { id: 7, name: "Office Chair (Set 20)", category: "Furniture",   serial: "SN-2023-00811", assigned: "",               date: "2023-09-12", value: 40000, status: "Available" }
+];
+
+let nextId = 8;
+let editingId = null;
+let deletingId = null;
+let activePillStatus = '';
+
+const categoryIcons = {
+    Electronics: 'fa-laptop',
+    Furniture:   'fa-chair',
+    Vehicle:     'fa-car',
+    Equipment:   'fa-gears',
+    Software:    'fa-code',
+};
+
+// ── Render ────────────────────────────────────────────────────
+function render(list) {
+    const tbody = document.getElementById('assetBody');
+    const empty = document.getElementById('emptyState');
+    const count = document.getElementById('assetCount');
+
+    tbody.innerHTML = '';
+    count.textContent = list.length + ' asset' + (list.length !== 1 ? 's' : '');
+
+    if (list.length === 0) {
+        empty.style.display = 'flex';
+        return;
+    }
+    empty.style.display = 'none';
+
+    list.forEach((a, i) => {
+        const statusClass = a.status === 'Available' ? 'badge-available'
+                          : a.status === 'Assigned'  ? 'badge-assigned'
+                          : 'badge-maintenance';
+        const icon = categoryIcons[a.category] || 'fa-box';
+        const value = a.value ? '₱' + Number(a.value).toLocaleString() : '—';
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td class="col-num">${i + 1}</td>
+            <td>
+                <div class="asset-name-cell">
+                    <span class="asset-avatar"><i class="fa-solid ${icon}"></i></span>
+                    <span class="asset-name-text">${a.name}</span>
+                </div>
+            </td>
+            <td><span class="cat-chip">${a.category}</span></td>
+            <td class="serial-cell">${a.serial}</td>
+            <td>${a.assigned
+                ? `<div class="assignee-cell"><span class="assignee-dot"></span>${a.assigned}</div>`
+                : '<span class="unassigned">Unassigned</span>'}</td>
+            <td class="date-cell">${formatDate(a.date)}</td>
+            <td class="value-cell">${value}</td>
+            <td><span class="status-badge ${statusClass}">${a.status}</span></td>
+            <td class="col-actions">
+                <div class="action-group">
+                    <button class="act-btn act-edit" onclick="openModal('edit', ${a.id})" title="Edit asset">
+                        <i class="fa-solid fa-pen-to-square"></i>
+                    </button>
+                    <button class="act-btn act-del" onclick="openDelete(${a.id})" title="Delete asset">
+                        <i class="fa-solid fa-trash-can"></i>
+                    </button>
+                </div>
+            </td>`;
+        tbody.appendChild(row);
+    });
+
+    updateKPIs();
+}
+
+function formatDate(d) {
+    if (!d) return '—';
+    return new Date(d).toLocaleDateString('en-PH', { year: 'numeric', month: 'short', day: 'numeric' });
+}
+
+function updateKPIs() {
+    document.getElementById('kpi-total').textContent       = assets.length;
+    document.getElementById('kpi-available').textContent   = assets.filter(a => a.status === 'Available').length;
+    document.getElementById('kpi-assigned').textContent    = assets.filter(a => a.status === 'Assigned').length;
+    document.getElementById('kpi-maintenance').textContent = assets.filter(a => a.status === 'Maintenance').length;
+}
+
+// ── Filter ────────────────────────────────────────────────────
+function filterAssets() {
+    const q   = document.getElementById('searchInput').value.toLowerCase();
+    const cat = document.getElementById('filterCategory').value;
+    document.getElementById('searchClear').style.display = q ? 'flex' : 'none';
+
+    const filtered = assets.filter(a => {
+        const matchQ = !q || [a.name, a.category, a.serial, a.assigned].some(f => f.toLowerCase().includes(q));
+        const matchS = !activePillStatus || a.status === activePillStatus;
+        const matchC = !cat || a.category === cat;
+        return matchQ && matchS && matchC;
+    });
+    render(filtered);
+}
+
+function clearSearch() {
+    document.getElementById('searchInput').value = '';
+    filterAssets();
+}
+
+function setPillFilter(el, status) {
+    document.querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
+    el.classList.add('active');
+    activePillStatus = status;
+    filterAssets();
+}
+
+// ── Modal ─────────────────────────────────────────────────────
+function openModal(mode, id = null) {
+    editingId = id;
+    clearForm();
+
+    const eyebrow = document.getElementById('modalEyebrow');
+    const title   = document.getElementById('modalTitle');
+    const saveBtn = document.getElementById('saveBtn');
+
+    if (mode === 'edit' && id !== null) {
+        const a = assets.find(x => x.id === id);
+        if (!a) return;
+        eyebrow.textContent  = 'EDIT ASSET';
+        title.textContent    = 'Edit Asset';
+        saveBtn.innerHTML    = '<i class="fa-solid fa-floppy-disk"></i> Save Changes';
+        document.getElementById('f-name').value     = a.name;
+        document.getElementById('f-category').value = a.category;
+        document.getElementById('f-serial').value   = a.serial;
+        document.getElementById('f-assigned').value = a.assigned;
+        document.getElementById('f-date').value     = a.date;
+        document.getElementById('f-value').value    = a.value;
+        const radio = document.querySelector(`input[name="f-status"][value="${a.status}"]`);
+        if (radio) radio.checked = true;
+    } else {
+        eyebrow.textContent = 'NEW ASSET';
+        title.textContent   = 'Add Asset';
+        saveBtn.innerHTML   = '<i class="fa-solid fa-floppy-disk"></i> Save Asset';
+    }
+
+    document.getElementById('modalOverlay').classList.add('show');
+}
+
+function closeModal() {
+    document.getElementById('modalOverlay').classList.remove('show');
+    clearForm();
+    editingId = null;
+}
+
+function closeModalOutside(e) {
+    if (e.target.id === 'modalOverlay') closeModal();
+}
+
+function clearForm() {
+    ['f-name','f-category','f-serial','f-assigned','f-date','f-value'].forEach(id => {
+        document.getElementById(id).value = '';
+    });
+    document.querySelectorAll('input[name="f-status"]').forEach(r => r.checked = false);
+    document.getElementById('formError').style.display = 'none';
+}
+
+function saveAsset() {
+    const name     = document.getElementById('f-name').value.trim();
+    const category = document.getElementById('f-category').value;
+    const serial   = document.getElementById('f-serial').value.trim();
+    const assigned = document.getElementById('f-assigned').value.trim();
+    const date     = document.getElementById('f-date').value;
+    const value    = document.getElementById('f-value').value;
+    const statusEl = document.querySelector('input[name="f-status"]:checked');
+    const status   = statusEl ? statusEl.value : '';
+
+    if (!name || !category || !serial || !status) {
+        showError('Asset name, category, serial number, and status are required.');
+        return;
+    }
+
+    if (editingId !== null) {
+        const idx = assets.findIndex(a => a.id === editingId);
+        assets[idx] = { id: editingId, name, category, serial, assigned, date, value, status };
+        toast('Asset updated successfully.', 'success');
+    } else {
+        assets.push({ id: nextId++, name, category, serial, assigned, date, value, status });
+        toast('Asset added successfully.', 'success');
+    }
+
+    closeModal();
+    filterAssets();
+}
+
+function showError(msg) {
+    document.getElementById('formErrorMsg').textContent = msg;
+    document.getElementById('formError').style.display  = 'flex';
+}
+
+// ── Delete ────────────────────────────────────────────────────
+function openDelete(id) {
+    deletingId = id;
+    const a = assets.find(x => x.id === id);
+    document.getElementById('deleteAssetName').textContent = a ? a.name : 'this asset';
+    document.getElementById('deleteOverlay').classList.add('show');
+}
+
+function closeDelete() {
+    document.getElementById('deleteOverlay').classList.remove('show');
+    deletingId = null;
+}
+
+function closeDeleteOutside(e) {
+    if (e.target.id === 'deleteOverlay') closeDelete();
+}
+
+function confirmDelete() {
+    const name = assets.find(a => a.id === deletingId)?.name || 'Asset';
+    assets = assets.filter(a => a.id !== deletingId);
+    closeDelete();
+    filterAssets();
+    toast(`"${name}" has been deleted.`, 'danger');
+}
+
+// ── Export CSV ────────────────────────────────────────────────
+function exportCSV() {
+    const headers = ['Name','Category','Serial','Assigned To','Purchase Date','Value','Status'];
+    const rows = assets.map(a => [a.name, a.category, a.serial, a.assigned, a.date, a.value, a.status]);
+    const csv = [headers, ...rows].map(r => r.map(v => `"${v}"`).join(',')).join('\n');
+    const blob = new Blob([csv], { type: 'text/csv' });
+    const url  = URL.createObjectURL(blob);
+    const a    = document.createElement('a');
+    a.href = url; a.download = 'assets.csv'; a.click();
+    URL.revokeObjectURL(url);
+    toast('Assets exported to CSV.', 'success');
+}
+
+// ── Toast ─────────────────────────────────────────────────────
+function toast(msg, type = 'success') {
+    const wrap = document.getElementById('toastWrap');
+    const t = document.createElement('div');
+    t.className = `toast toast-${type}`;
+    t.innerHTML = `<i class="fa-solid ${type === 'success' ? 'fa-circle-check' : 'fa-circle-exclamation'}"></i><span>${msg}</span>`;
+    wrap.appendChild(t);
+    setTimeout(() => t.classList.add('toast-show'), 10);
+    setTimeout(() => {
+        t.classList.remove('toast-show');
+        setTimeout(() => t.remove(), 350);
+    }, 3000);
+}
+
+// ── Init ──────────────────────────────────────────────────────
+render(assets);
+window.openModal = openModal;
+window.closeModal = closeModal;
+window.saveAsset = saveAsset;
+window.openDelete = openDelete;
+window.confirmDelete = confirmDelete;
+window.exportCSV = exportCSV;
+window.filterAssets = filterAssets;
+window.clearSearch = clearSearch;
+window.setPillFilter = setPillFilter;
+</script>
+
+  </main>
+</body>
+</html>

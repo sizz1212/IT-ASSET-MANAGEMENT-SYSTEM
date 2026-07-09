@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Employees</title>
+<link rel="stylesheet" href="static/css/employees.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link rel="stylesheet" href="static/css/layout.css">
+<link rel="stylesheet" href="static/css/style.css">
+<link rel="stylesheet" href="static/css/responsive-tweaks.css">
+<script src="static/js/layout.js"></script>
+</head>
+<body>
+
+<!-- Side Bar -->
+<nav class="sidebar" aria-label="Main navigation">
+    <div class="sidebar__brand">
+        <div class="sidebar__logo" aria-hidden="true">IT</div>
+        <div class="sidebar__brand-text">
+            <div class="sidebar__brand-name">IT Asset</div>
+            <div class="sidebar__brand-sub">Management System</div>
+        </div>
+    </div>
+
+<ul class="sidebar__nav">
+    <li>
+        <a class="sidebar__link" href="index.html">
+            <span class="sidebar__icon" aria-hidden="true">📊</span>
+            <span class="sidebar__label">Dashboard</span>
+        </a>
+    </li>
+
+    <li>
+        <a class="sidebar__link" href="assets.html">
+            <span class="sidebar__icon" aria-hidden="true">🧩</span>
+            <span class="sidebar__label">Assets</span>
+        </a>
+    </li>
+
+    <li>
+        <a class="sidebar__link" href="employees.html">
+            <span class="sidebar__icon" aria-hidden="true">👥</span>
+            <span class="sidebar__label">Employees</span>
+        </a>
+    </li>
+
+    <li>
+        <a class="sidebar__link" href="assignments.html">
+            <span class="sidebar__icon" aria-hidden="true">🧾</span>
+            <span class="sidebar__label">Assignments</span>
+        </a>
+    </li>
+
+    <li>
+        <a class="sidebar__link" href="maintenance.html">
+            <span class="sidebar__icon" aria-hidden="true">🛠️</span>
+            <span class="sidebar__label">Maintenance</span>
+        </a>
+    </li>
+
+    <li>
+        <a class="sidebar__link" href="reports.html">
+            <span class="sidebar__icon" aria-hidden="true">📈</span>
+            <span class="sidebar__label">Reports</span>
+        </a>
+    </li>
+
+    <li>
+        <a class="sidebar__link" href="settings.html">
+            <span class="sidebar__icon" aria-hidden="true">⚙️</span>
+            <span class="sidebar__label">Settings</span>
+        </a>
+    </li>
+
+    <li>
+        <a class="sidebar__link" href="login.html">
+            <span class="sidebar__icon" aria-hidden="true">🚪</span>
+            <span class="sidebar__label">Logout</span>
+        </a>
+    </li>
+</ul>
+</nav>
+
+  <!-- Page content -->
+  <main class="main">
+    <header class="page-shell">
+    <div class="page-shell__left">
+      <h1 class="page-shell__title">Employees</h1>
+      <div class="page-shell__subtitle" id="rosterSubtitle">6 on the roster</div>
+    </div>
+    <div class="page-shell__actions"></div>
+  </header>
+
+<div class="employees-page">
+  <div class="accent-strip" aria-hidden="true"></div>
+
+  <div class="page-header__actions">
+      <div class="search-field">
+        <svg class="icon" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+          <circle cx="9" cy="9" r="6" stroke="currentColor" stroke-width="1.6"/>
+          <path d="M14 14L18 18" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+        </svg>
+        <input type="text" id="employee-search" placeholder="Search by name, role, or department" aria-label="Search employees">
+      </div>
+
+      <button type="button" class="btn btn--primary" id="open-add-employee">
+        <svg class="icon" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+          <path d="M10 4V16M4 10H16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+        </svg>
+        Add employee
+      </button>
+    </div>
+
+  <div class="metrics-row">
+    <div class="metric-card">
+      <div class="metric-card__icon">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M9 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM3 20c0-3 3-5 6-5s6 2 6 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M16 11a2.5 2.5 0 1 0 0-5M18 20c0-2.5-1.8-4.3-4-4.9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div>
+        <p class="metric-card__value" id="metric-total">6</p>
+        <p class="metric-card__label">Total roster</p>
+      </div>
+    </div>
+
+    <div class="metric-card">
+      <div class="metric-card__icon">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.6"/>
+          <path d="M8.5 12.5l2.5 2.5 5-5.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div>
+        <p class="metric-card__value" id="metric-active">5</p>
+        <p class="metric-card__label">Active</p>
+      </div>
+    </div>
+
+    <div class="metric-card metric-card--muted">
+      <div class="metric-card__icon">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.6"/>
+          <path d="M9.5 9.5l5 5M14.5 9.5l-5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div>
+        <p class="metric-card__value" id="metric-inactive">1</p>
+        <p class="metric-card__label">Inactive</p>
+      </div>
+    </div>
+
+    <div class="metric-card metric-card--info">
+      <div class="metric-card__icon">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <rect x="5" y="4" width="14" height="16" rx="1.5" stroke="currentColor" stroke-width="1.6"/>
+          <path d="M9 8h2M13 8h2M9 12h2M13 12h2M9 16h2M13 16h2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div>
+        <p class="metric-card__value" id="metric-departments">4</p>
+        <p class="metric-card__label">Departments</p>
+      </div>
+    </div>
+  </div>
+
+  <section class="table-toolbar" aria-label="Employee table controls">
+    <div class="table-toolbar__left">
+      <div class="filter-group">
+        <span class="filter-group__label">Status</span>
+        <div class="chip-row" role="radiogroup" aria-label="Filter by status">
+          <button type="button" class="chip is-active" data-status="all" role="radio" aria-checked="true">All</button>
+          <button type="button" class="chip" data-status="active" role="radio" aria-checked="false">Active</button>
+          <button type="button" class="chip" data-status="inactive" role="radio" aria-checked="false">Inactive</button>
+        </div>
+      </div>
+
+      <div class="filter-group">
+        <label for="department-filter" class="filter-group__label">Department</label>
+        <select id="department-filter" class="select" aria-label="Filter by department">
+          <option value="all" selected>All departments</option>
+          <option value="Engineering">Engineering</option>
+          <option value="Design">Design</option>
+          <option value="Operations">Operations</option>
+          <option value="Finance">Finance</option>
+        </select>
+      </div>
+
+      <div class="filter-group">
+        <label for="sort-select" class="filter-group__label">Sort</label>
+        <select id="sort-select" class="select" aria-label="Sort employees">
+          <option value="name-asc" selected>Name (A–Z)</option>
+          <option value="name-desc">Name (Z–A)</option>
+          <option value="hire-date-desc">Hire date (newest)</option>
+          <option value="hire-date-asc">Hire date (oldest)</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="table-toolbar__right">
+      <div class="results-meta" aria-live="polite">
+        <span class="results-meta__count" id="results-count">6</span>
+        <span class="results-meta__label">results</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="table-card">
+    <div class="table-state table-state--no-results" id="no-results" hidden>
+      <div class="table-state__icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none">
+          <path d="M4 4l16 16" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+          <circle cx="12" cy="12" r="8" stroke="currentColor" stroke-width="1.6"/>
+          <path d="M8.5 12.5l2 2 5-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <h3>No matching employees</h3>
+      <p>Adjust the filters or try a different search.</p>
+      <button type="button" class="btn btn--ghost" id="clear-filters">Clear filters</button>
+    </div>
+
+    <table class="employee-table" id="employee-table">
+      <thead>
+        <tr>
+          <th scope="col">Employee</th>
+          <th scope="col">Email</th>
+          <th scope="col">Position</th>
+          <th scope="col">Department</th>
+          <th scope="col">Status</th>
+          <th scope="col">Hire date</th>
+          <th scope="col"><span class="sr-only">Actions</span></th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Static mock roster (front-end only, replaces server-rendered employees loop) -->
+        <tr data-id="1">
+          <td data-label="Employee">
+            <div class="employee-cell">
+              <span class="avatar">JC</span>
+              <div class="employee-cell__text">
+                <span class="employee-cell__name">John Chen</span>
+                <span class="employee-cell__id">#1</span>
+              </div>
+            </div>
+          </td>
+          <td data-label="Email">john.chen@example.com</td>
+          <td data-label="Position">Software Engineer</td>
+          <td data-label="Department">Engineering</td>
+          <td data-label="Status"><span class="badge badge--active">Active</span></td>
+          <td data-label="Hire date">2023-02-10</td>
+          <td data-label="Actions">
+            <div class="row-actions">
+              <a class="icon-btn" href="#" aria-label="Edit John Chen">
+                <svg class="icon" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                  <path d="M13.5 3.5L16.5 6.5L7 16H4V13L13.5 3.5Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+                </svg>
+              </a>
+              <button type="button" class="icon-btn icon-btn--danger row-delete" aria-label="Remove John Chen">
+                <svg class="icon" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                  <path d="M4 5.5H16M8 5.5V3.8C8 3.4 8.3 3 8.8 3H11.2C11.7 3 12 3.4 12 3.8V5.5M9 9V14M11 9V14M5.5 5.5L6.2 16C6.3 16.6 6.8 17 7.4 17H12.6C13.2 17 13.7 16.6 13.8 16L14.5 5.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </button>
+            </div>
+          </td>
+        </tr>
+        <tr data-id="2">
+          <td data-label="Employee">
+            <div class="employee-cell">
+              <span class="avatar">SK</span>
+              <div class="employee-cell__text">
+                <span class="employee-cell__name">Sarah Kim</span>
+                <span class="employee-cell__id">#2</span>
+              </div>
+            </div>
+          </td>
+          <td data-label="Email">sarah.kim@example.com</td>
+          <td data-label="Position">DevOps Engineer</td>
+          <td data-label="Department">Engineering</td>
+          <td data-label="Status"><span class="badge badge--active">Active</span></td>
+          <td data-label="Hire date">2023-06-01</td>
+          <td data-label="Actions">
+            <div class="row-actions">
+              <a class="icon-btn" href="#" aria-label="Edit Sarah Kim">
+                <svg class="icon" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                  <path d="M13.5 3.5L16.5 6.5L7 16H4V13L13.5 3.5Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+                </svg>
+              </a>
+              <button type="button" class="icon-btn icon-btn--danger row-delete" aria-label="Remove Sarah Kim">
+                <svg class="icon" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                  <path d="M4 5.5H16M8 5.5V3.8C8 3.4 8.3 3 8.8 3H11.2C11.7 3 12 3.4 12 3.8V5.5M9 9V14M11 9V14M5.5 5.5L6.2 16C6.3 16.6 6.8 17 7.4 17H12.6C13.2 17 13.7 16.6 13.8 16L14.5 5.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </button>
+            </div>
+          </td>
+        </tr>
+        <tr data-id="3">
+          <td data-label="Employee">
+            <div class="employee-cell">
+              <span class="avatar">MT</span>
+              <div class="employee-cell__text">
+                <span class="employee-cell__name">Michael Torres</span>
+                <span class="employee-cell__id">#3</span>
+              </div>
+            </div>
+          </td>
+          <td data-label="Email">michael.torres@example.com</td>
+          <td data-label="Position">QA Lead</td>
+          <td data-label="Department">Engineering</td>
+          <td data-label="Status"><span class="badge badge--inactive">Inactive</span></td>
+          <td data-label="Hire date">2022-11-15</td>
+          <td data-label="Actions">
+            <div class="row-actions">
+              <a class="icon-btn" href="#" aria-label="Edit Michael Torres">
+                <svg class="icon" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                  <path d="M13.5 3.5L16.5 6.5L7 16H4V13L13.5 3.5Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+                </svg>
+              </a>
+              <button type="button" class="icon-btn icon-btn--danger row-delete" aria-label="Remove Michael Torres">
+                <svg class="icon" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                  <path d="M4 5.5H16M8 5.5V3.8C8 3.4 8.3 3 8.8 3H11.2C11.7 3 12 3.4 12 3.8V5.5M9 9V14M11 9V14M5.5 5.5L6.2 16C6.3 16.6 6.8 17 7.4 17H12.6C13.2 17 13.7 16.6 13.8 16L14.5 5.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </button>
+            </div>
+          </td>
+        </tr>
+        <tr data-id="4">
+          <td data-label="Employee">
+            <div class="employee-cell">
+              <span class="avatar">EZ</span>
+              <div class="employee-cell__text">
+                <span class="employee-cell__name">Emily Zhang</span>
+                <span class="employee-cell__id">#4</span>
+              </div>
+            </div>
+          </td>
+          <td data-label="Email">emily.zhang@example.com</td>
+          <td data-label="Position">UI Designer</td>
+          <td data-label="Department">Design</td>
+          <td data-label="Status"><span class="badge badge--active">Active</span></td>
+          <td data-label="Hire date">2024-01-08</td>
+          <td data-label="Actions">
+            <div class="row-actions">
+              <a class="icon-btn" href="#" aria-label="Edit Emily Zhang">
+                <svg class="icon" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                  <path d="M13.5 3.5L16.5 6.5L7 16H4V13L13.5 3.5Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+                </svg>
+              </a>
+              <button type="button" class="icon-btn icon-btn--danger row-delete" aria-label="Remove Emily Zhang">
+                <svg class="icon" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                  <path d="M4 5.5H16M8 5.5V3.8C8 3.4 8.3 3 8.8 3H11.2C11.7 3 12 3.4 12 3.8V5.5M9 9V14M11 9V14M5.5 5.5L6.2 16C6.3 16.6 6.8 17 7.4 17H12.6C13.2 17 13.7 16.6 13.8 16L14.5 5.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </button>
+            </div>
+          </td>
+        </tr>
+        <tr data-id="5">
+          <td data-label="Employee">
+            <div class="employee-cell">
+              <span class="avatar">LW</span>
+              <div class="employee-cell__text">
+                <span class="employee-cell__name">Lisa Wang</span>
+                <span class="employee-cell__id">#5</span>
+              </div>
+            </div>
+          </td>
+          <td data-label="Email">lisa.wang@example.com</td>
+          <td data-label="Position">HR Manager</td>
+          <td data-label="Department">Operations</td>
+          <td data-label="Status"><span class="badge badge--active">Active</span></td>
+          <td data-label="Hire date">2021-09-20</td>
+          <td data-label="Actions">
+            <div class="row-actions">
+              <a class="icon-btn" href="#" aria-label="Edit Lisa Wang">
+                <svg class="icon" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                  <path d="M13.5 3.5L16.5 6.5L7 16H4V13L13.5 3.5Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+                </svg>
+              </a>
+              <button type="button" class="icon-btn icon-btn--danger row-delete" aria-label="Remove Lisa Wang">
+                <svg class="icon" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                  <path d="M4 5.5H16M8 5.5V3.8C8 3.4 8.3 3 8.8 3H11.2C11.7 3 12 3.4 12 3.8V5.5M9 9V14M11 9V14M5.5 5.5L6.2 16C6.3 16.6 6.8 17 7.4 17H12.6C13.2 17 13.7 16.6 13.8 16L14.5 5.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </button>
+            </div>
+          </td>
+        </tr>
+        <tr data-id="6">
+          <td data-label="Employee">
+            <div class="employee-cell">
+              <span class="avatar">JL</span>
+              <div class="employee-cell__text">
+                <span class="employee-cell__name">James Liu</span>
+                <span class="employee-cell__id">#6</span>
+              </div>
+            </div>
+          </td>
+          <td data-label="Email">james.liu@example.com</td>
+          <td data-label="Position">Finance Analyst</td>
+          <td data-label="Department">Finance</td>
+          <td data-label="Status"><span class="badge badge--active">Active</span></td>
+          <td data-label="Hire date">2022-04-18</td>
+          <td data-label="Actions">
+            <div class="row-actions">
+              <a class="icon-btn" href="#" aria-label="Edit James Liu">
+                <svg class="icon" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                  <path d="M13.5 3.5L16.5 6.5L7 16H4V13L13.5 3.5Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+                </svg>
+              </a>
+              <button type="button" class="icon-btn icon-btn--danger row-delete" aria-label="Remove James Liu">
+                <svg class="icon" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                  <path d="M4 5.5H16M8 5.5V3.8C8 3.4 8.3 3 8.8 3H11.2C11.7 3 12 3.4 12 3.8V5.5M9 9V14M11 9V14M5.5 5.5L6.2 16C6.3 16.6 6.8 17 7.4 17H12.6C13.2 17 13.7 16.6 13.8 16L14.5 5.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="panel-overlay" id="panel-overlay" hidden></div>
+
+  <aside class="add-employee-panel" id="add-employee-panel" role="dialog" aria-modal="true" aria-labelledby="panel-title" hidden>
+    <form id="addEmployeeForm" class="panel-form">
+      <div class="panel-form__header">
+        <div class="panel-form__heading">
+          <span class="avatar avatar--preview" id="avatar-preview">+</span>
+          <div>
+            <h2 id="panel-title">New employee</h2>
+          </div>
+        </div>
+
+        <button type="button" class="icon-btn" id="close-add-employee" aria-label="Close form">
+          <svg class="icon" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+            <path d="M5 5L15 15M15 5L5 15" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+          </svg>
+        </button>
+      </div>
+
+      <div class="panel-form__body">
+        <div class="field">
+          <label for="employee-name">Full name</label>
+          <input type="text" id="employee-name" name="name" required autocomplete="off">
+        </div>
+
+        <div class="field">
+          <label for="employee-email">Email</label>
+          <input type="email" id="employee-email" name="email" required autocomplete="off">
+        </div>
+
+        <div class="field-row">
+          <div class="field">
+            <label for="employee-position">Position</label>
+            <input type="text" id="employee-position" name="position" required autocomplete="off">
+          </div>
+
+          <div class="field">
+            <label for="employee-department">Department</label>
+            <select id="employee-department" name="department" required>
+              <option value="" disabled selected>Select one</option>
+              <option value="Engineering">Engineering</option>
+              <option value="Design">Design</option>
+              <option value="Sales">Sales</option>
+              <option value="Marketing">Marketing</option>
+              <option value="HR">HR</option>
+              <option value="Finance">Finance</option>
+              <option value="Operations">Operations</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="field-row">
+          <div class="field">
+            <label for="employee-hire-date">Hire date</label>
+            <input type="date" id="employee-hire-date" name="hire_date">
+          </div>
+
+          <div class="field">
+            <label for="employee-status">Status</label>
+            <select id="employee-status" name="status">
+              <option value="active" selected>Active</option>
+              <option value="inactive">Inactive</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel-form__footer">
+        <button type="button" class="btn btn--ghost" id="cancel-add-employee">Cancel</button>
+        <button type="submit" class="btn btn--primary">Add employee</button>
+      </div>
+    </form>
+  </aside>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const searchInput = document.getElementById('employee-search');
+  const departmentFilter = document.getElementById('department-filter');
+  const sortSelect = document.getElementById('sort-select');
+  const chips = Array.from(document.querySelectorAll('.chip'));
+  const tbody = document.querySelector('#employee-table tbody');
+  const noResults = document.getElementById('no-results');
+  const resultsCount = document.getElementById('results-count');
+  const clearFiltersBtn = document.getElementById('clear-filters');
+
+  let currentStatus = 'all';
+  let nextEmployeeId = 7;
+
+  function rows() {
+    return Array.from(document.querySelectorAll('#employee-table tbody tr'));
+  }
+
+  function updateMetrics() {
+    const all = rows();
+    const active = all.filter(r => getRowData(r).status === 'active').length;
+    const depts = new Set(all.map(r => getRowData(r).department));
+    document.getElementById('metric-total').textContent = all.length;
+    document.getElementById('metric-active').textContent = active;
+    document.getElementById('metric-inactive').textContent = all.length - active;
+    document.getElementById('metric-departments').textContent = depts.size;
+    document.getElementById('rosterSubtitle').textContent = all.length + ' on the roster';
+  }
+
+  function getRowData(row) {
+    const cells = row.querySelectorAll('td');
+    return {
+      name: cells[0]?.innerText.toLowerCase() || '',
+      email: cells[1]?.innerText.toLowerCase() || '',
+      position: cells[2]?.innerText.toLowerCase() || '',
+      department: cells[3]?.innerText.trim() || '',
+      status: cells[4]?.innerText.trim().toLowerCase() || '',
+      hireDate: cells[5]?.innerText.trim() || ''
+    };
+  }
+
+  function applyFilters() {
+    const query = (searchInput?.value || '').toLowerCase().trim();
+    const dept = departmentFilter?.value || 'all';
+
+    let visibleCount = 0;
+
+    rows().forEach(row => {
+      const data = getRowData(row);
+
+      const matchesSearch =
+        !query ||
+        data.name.includes(query) ||
+        data.email.includes(query) ||
+        data.position.includes(query) ||
+        data.department.toLowerCase().includes(query);
+
+      const matchesDepartment = dept === 'all' || data.department === dept;
+      const matchesStatus = currentStatus === 'all' || data.status === currentStatus;
+
+      const show = matchesSearch && matchesDepartment && matchesStatus;
+      row.style.display = show ? '' : 'none';
+
+      if (show) visibleCount++;
+    });
+
+    if (resultsCount) resultsCount.textContent = visibleCount;
+    if (noResults) noResults.hidden = visibleCount !== 0;
+  }
+
+  function sortRows() {
+    if (!sortSelect || !tbody) return;
+
+    const sorted = rows().sort((a, b) => {
+      const A = getRowData(a);
+      const B = getRowData(b);
+
+      switch (sortSelect.value) {
+        case 'name-desc':
+          return B.name.localeCompare(A.name);
+        case 'hire-date-desc':
+          return new Date(B.hireDate || 0) - new Date(A.hireDate || 0);
+        case 'hire-date-asc':
+          return new Date(A.hireDate || 0) - new Date(B.hireDate || 0);
+        case 'name-asc':
+        default:
+          return A.name.localeCompare(B.name);
+      }
+    });
+
+    sorted.forEach(row => tbody.appendChild(row));
+  }
+
+  chips.forEach(chip => {
+    chip.addEventListener('click', () => {
+      chips.forEach(c => {
+        c.classList.remove('is-active');
+        c.setAttribute('aria-checked', 'false');
+      });
+
+      chip.classList.add('is-active');
+      chip.setAttribute('aria-checked', 'true');
+      currentStatus = chip.dataset.status || 'all';
+      applyFilters();
+    });
+  });
+
+  searchInput?.addEventListener('input', applyFilters);
+  departmentFilter?.addEventListener('change', applyFilters);
+  sortSelect?.addEventListener('change', () => {
+    sortRows();
+    applyFilters();
+  });
+
+  clearFiltersBtn?.addEventListener('click', () => {
+    if (searchInput) searchInput.value = '';
+    if (departmentFilter) departmentFilter.value = 'all';
+    if (sortSelect) sortSelect.value = 'name-asc';
+    currentStatus = 'all';
+
+    chips.forEach(c => {
+      c.classList.remove('is-active');
+      c.setAttribute('aria-checked', 'false');
+    });
+
+    const allChip = document.querySelector('.chip[data-status="all"]');
+    allChip?.classList.add('is-active');
+    allChip?.setAttribute('aria-checked', 'true');
+
+    sortRows();
+    applyFilters();
+  });
+
+  // Row delete (front-end only, removes from the DOM)
+  document.getElementById('employee-table')?.addEventListener('click', (e) => {
+    const btn = e.target.closest('.row-delete');
+    if (!btn) return;
+    const row = btn.closest('tr');
+    const name = row?.querySelector('.employee-cell__name')?.textContent || 'this employee';
+    if (confirm(`Remove ${name} from the roster?`)) {
+      row.remove();
+      updateMetrics();
+      applyFilters();
+    }
+  });
+
+  const panel = document.getElementById('add-employee-panel');
+  const overlay = document.getElementById('panel-overlay');
+  const openButtons = [
+    document.getElementById('open-add-employee')
+  ].filter(Boolean);
+  const closeBtn = document.getElementById('close-add-employee');
+  const cancelBtn = document.getElementById('cancel-add-employee');
+
+  function openPanel() {
+    if (!panel || !overlay) return;
+    panel.hidden = false;
+    overlay.hidden = false;
+    requestAnimationFrame(() => {
+      panel.classList.add('is-open');
+      overlay.classList.add('is-visible');
+    });
+  }
+
+  function closePanel() {
+    if (!panel || !overlay) return;
+    panel.classList.remove('is-open');
+    overlay.classList.remove('is-visible');
+
+    setTimeout(() => {
+      panel.hidden = true;
+      overlay.hidden = true;
+    }, 250);
+  }
+
+  openButtons.forEach(btn => btn.addEventListener('click', openPanel));
+  closeBtn?.addEventListener('click', closePanel);
+  cancelBtn?.addEventListener('click', closePanel);
+  overlay?.addEventListener('click', closePanel);
+
+  // Add employee (front-end only, appends a row to the table)
+  document.getElementById('addEmployeeForm')?.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const name = document.getElementById('employee-name').value.trim();
+    const email = document.getElementById('employee-email').value.trim();
+    const position = document.getElementById('employee-position').value.trim();
+    const department = document.getElementById('employee-department').value;
+    const hireDate = document.getElementById('employee-hire-date').value || '—';
+    const status = document.getElementById('employee-status').value;
+
+    if (!name || !email || !position || !department) return;
+
+    const parts = name.split(' ');
+    const initials = (parts[0]?.[0] || '') + (parts[1]?.[0] || '');
+    const id = nextEmployeeId++;
+
+    const row = document.createElement('tr');
+    row.dataset.id = id;
+    row.innerHTML = `
+      <td data-label="Employee">
+        <div class="employee-cell">
+          <span class="avatar">${initials.toUpperCase()}</span>
+          <div class="employee-cell__text">
+            <span class="employee-cell__name">${name}</span>
+            <span class="employee-cell__id">#${id}</span>
+          </div>
+        </div>
+      </td>
+      <td data-label="Email">${email}</td>
+      <td data-label="Position">${position}</td>
+      <td data-label="Department">${department}</td>
+      <td data-label="Status"><span class="badge ${status === 'active' ? 'badge--active' : 'badge--inactive'}">${status === 'active' ? 'Active' : 'Inactive'}</span></td>
+      <td data-label="Hire date">${hireDate}</td>
+      <td data-label="Actions">
+        <div class="row-actions">
+          <a class="icon-btn" href="#" aria-label="Edit ${name}">
+            <svg class="icon" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+              <path d="M13.5 3.5L16.5 6.5L7 16H4V13L13.5 3.5Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+            </svg>
+          </a>
+          <button type="button" class="icon-btn icon-btn--danger row-delete" aria-label="Remove ${name}">
+            <svg class="icon" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+              <path d="M4 5.5H16M8 5.5V3.8C8 3.4 8.3 3 8.8 3H11.2C11.7 3 12 3.4 12 3.8V5.5M9 9V14M11 9V14M5.5 5.5L6.2 16C6.3 16.6 6.8 17 7.4 17H12.6C13.2 17 13.7 16.6 13.8 16L14.5 5.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+        </div>
+      </td>`;
+
+    tbody.appendChild(row);
+    updateMetrics();
+    sortRows();
+    applyFilters();
+    e.target.reset();
+    closePanel();
+  });
+
+  sortRows();
+  applyFilters();
+  updateMetrics();
+});
+</script>
+
+</main>
+</body>
+</html>

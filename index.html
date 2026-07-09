@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Asset OS — Main Content</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<link rel="stylesheet" href="static/css/dashboard.css">
+<link rel="stylesheet" href="static/css/layout.css">
+<link rel="stylesheet" href="static/css/style.css">
+<script src="static/js/layout.js"></script>
+</head>
+<body style="margin:0;background:#F8FAFC;">
+ 
+<!-- Side Bar -->
+<nav class="sidebar" aria-label="Main navigation">
+    <div class="sidebar__brand">
+        <div class="sidebar__logo" aria-hidden="true">IT</div>
+        <div class="sidebar__brand-text">
+            <div class="sidebar__brand-name">IT Asset</div>
+            <div class="sidebar__brand-sub">Management System</div>
+        </div>
+    </div>
+
+<ul class="sidebar__nav">
+    <li>
+        <a class="sidebar__link" href="index.html">
+            <span class="sidebar__icon" aria-hidden="true">📊</span>
+            <span class="sidebar__label">Dashboard</span>
+        </a>
+    </li>
+
+    <li>
+        <a class="sidebar__link" href="assets.html">
+            <span class="sidebar__icon" aria-hidden="true">🧩</span>
+            <span class="sidebar__label">Assets</span>
+        </a>
+    </li>
+
+    <li>
+        <a class="sidebar__link" href="employees.html">
+            <span class="sidebar__icon" aria-hidden="true">👥</span>
+            <span class="sidebar__label">Employees</span>
+        </a>
+    </li>
+
+    <li>
+        <a class="sidebar__link" href="assignments.html">
+            <span class="sidebar__icon" aria-hidden="true">🧾</span>
+            <span class="sidebar__label">Assignments</span>
+        </a>
+    </li>
+
+    <li>
+        <a class="sidebar__link" href="maintenance.html">
+            <span class="sidebar__icon" aria-hidden="true">🛠️</span>
+            <span class="sidebar__label">Maintenance</span>
+        </a>
+    </li>
+
+    <li>
+        <a class="sidebar__link" href="reports.html">
+            <span class="sidebar__icon" aria-hidden="true">📈</span>
+            <span class="sidebar__label">Reports</span>
+        </a>
+    </li>
+
+    <li>
+        <a class="sidebar__link" href="settings.html">
+            <span class="sidebar__icon" aria-hidden="true">⚙️</span>
+            <span class="sidebar__label">Settings</span>
+        </a>
+    </li>
+
+    <li>
+        <a class="sidebar__link" href="login.html">
+            <span class="sidebar__icon" aria-hidden="true">🚪</span>
+            <span class="sidebar__label">Logout</span>
+        </a>
+    </li>
+</ul>
+</nav>
+<main class="main">
+
+  <!-- ============================================================
+       PAGE HEADER (copied design from assets)
+  ============================================================= -->
+<header class="page-shell page-shell--assets">
+  <div class="page-shell__accent" aria-hidden="true">
+    <div class="page-shell__breadcrumbs breadcrumb">
+    </div>
+    <h1 class="page-shell__title">Dashboard</h1>
+    <div class="page-shell__subtitle">Monitor, manage, and track your assets and maintenance workflow in one place.</div>
+  </div>
+  <div class="page-shell__actions">
+    <button class="btn-export" type="button">
+      <i class="fa-solid fa-arrow-up-from-bracket"></i> Export
+    </button>
+    <a class="btn-primary" href="assets.html">
+      <i class="fa-solid fa-plus"></i> New Asset
+    </a>
+  </div>
+</header>
+
+
+  <!-- ============================================================
+       KPI ROW
+  ============================================================= -->
+  <section class="grid grid-4">
+    <div class="card kpi-card hoverable rise-in" style="--d:.02s">
+      <div class="kpi-top">
+        <span class="kpi-icon blue"><i class="fa-solid fa-boxes-stacked"></i></span>
+        <span class="kpi-delta up"><i class="fa-solid fa-arrow-up"></i>4.2%</span>
+      </div>
+      <div>
+        <p class="kpi-label">Total Assets</p>
+        <p class="kpi-value count" data-target="1284">0</p>
+      </div>
+      <svg class="kpi-spark" viewBox="0 0 120 32" preserveAspectRatio="none"><path d="M0,24 L15,20 L30,22 L45,14 L60,17 L75,9 L90,12 L105,6 L120,8" stroke="#2563EB"/></svg>
+    </div>
+    <div class="card kpi-card hoverable rise-in" style="--d:.08s">
+      <div class="kpi-top">
+        <span class="kpi-icon cyan"><i class="fa-solid fa-user-check"></i></span>
+        <span class="kpi-delta up"><i class="fa-solid fa-arrow-up"></i>2.1%</span>
+      </div>
+      <div>
+        <p class="kpi-label">Assigned Assets</p>
+        <p class="kpi-value count" data-target="892">0</p>
+      </div>
+      <svg class="kpi-spark" viewBox="0 0 120 32" preserveAspectRatio="none"><path d="M0,18 L15,20 L30,15 L45,19 L60,13 L75,16 L90,10 L105,12 L120,7" stroke="#06B6D4"/></svg>
+    </div>
+    <div class="card kpi-card hoverable rise-in" style="--d:.14s">
+      <div class="kpi-top">
+        <span class="kpi-icon amber"><i class="fa-solid fa-screwdriver-wrench"></i></span>
+        <span class="kpi-delta down"><i class="fa-solid fa-arrow-down"></i>1.4%</span>
+      </div>
+      <div>
+        <p class="kpi-label">In Maintenance</p>
+        <p class="kpi-value count" data-target="47">0</p>
+      </div>
+      <svg class="kpi-spark" viewBox="0 0 120 32" preserveAspectRatio="none"><path d="M0,10 L15,14 L30,9 L45,18 L60,15 L75,22 L90,17 L105,24 L120,20" stroke="#F59E0B"/></svg>
+    </div>
+    <div class="card kpi-card hoverable rise-in" style="--d:.2s">
+      <div class="kpi-top">
+        <span class="kpi-icon green"><i class="fa-solid fa-warehouse"></i></span>
+        <span class="kpi-delta up"><i class="fa-solid fa-arrow-up"></i>6.7%</span>
+      </div>
+      <div>
+        <p class="kpi-label">Available Stock</p>
+        <p class="kpi-value count" data-target="345">0</p>
+      </div>
+      <svg class="kpi-spark" viewBox="0 0 120 32" preserveAspectRatio="none"><path d="M0,26 L15,22 L30,23 L45,16 L60,19 L75,11 L90,14 L105,8 L120,10" stroke="#10B981"/></svg>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       QUICK ACTIONS
+  ============================================================= -->
+  <section>
+    <div class="section-heading">
+      <div><h2 class="text-h2">Quick Actions</h2><p class="text-small desc">Jump straight into the most common tasks.</p></div>
+    </div>
+    <div class="quick-actions-row">
+      <a class="quick-action-card" href="assets.html" data-action="add-asset">
+        <span class="quick-action-icon"><i class="fa-solid fa-plus"></i></span>
+        <div class="quick-action-text"><strong>Add Asset</strong><span>Register new hardware</span></div>
+      </a>
+      <a class="quick-action-card" href="assignments.html" data-action="assign-asset">
+        <span class="quick-action-icon"><i class="fa-solid fa-file-signature"></i></span>
+        <div class="quick-action-text"><strong>Assign Asset</strong><span>Give to an employee</span></div>
+      </a>
+      <a class="quick-action-card" href="reports.html" data-action="generate-report">
+        <span class="quick-action-icon"><i class="fa-solid fa-chart-simple"></i></span>
+        <div class="quick-action-text"><strong>Generate Report</strong><span>Fleet summary PDF</span></div>
+      </a>
+      <a class="quick-action-card" href="assets.html" data-action="export-data">
+        <span class="quick-action-icon"><i class="fa-solid fa-file-export"></i></span>
+        <div class="quick-action-text"><strong>Export Data</strong><span>Download as CSV</span></div>
+      </a>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       CHARTS
+  ============================================================= -->
+  <section>
+    <div class="section-heading">
+      <div><h2 class="text-h2">Fleet Insights</h2><p class="text-small desc">Live status, growth, and category breakdown.</p></div>
+    </div>
+
+    <div class="grid grid-charts" style="margin-bottom:16px;">
+      <div class="card chart-card hoverable rise-in" style="--d:.02s">
+        <div class="card-head"><div><h3>Monthly Asset Growth</h3><p>Total fleet size, last 7 months.</p></div></div>
+        <div class="chart-wrap">
+          <div class="chart-loading"><span class="spinner"></span></div>
+          <canvas id="growthChart"></canvas>
+        </div>
+      </div>
+      <div class="card chart-card hoverable rise-in" style="--d:.08s">
+        <div class="card-head"><div><h3>Asset Status</h3><p>Current fleet distribution.</p></div></div>
+        <div class="chart-wrap">
+          <div class="chart-loading"><span class="spinner"></span></div>
+          <canvas id="statusChart"></canvas>
+        </div>
+      </div>
+      <div class="card chart-card hoverable rise-in" style="--d:.14s">
+        <div class="card-head"><div><h3>Asset Distribution</h3><p>Share of total inventory.</p></div></div>
+        <div class="chart-wrap">
+          <div class="chart-loading"><span class="spinner"></span></div>
+          <canvas id="distributionChart"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid grid-charts-2">
+      <div class="card chart-card hoverable rise-in" style="--d:.02s">
+        <div class="card-head"><div><h3>Asset Categories</h3><p>Unit count by category.</p></div></div>
+        <div class="chart-wrap">
+          <div class="chart-loading"><span class="spinner"></span></div>
+          <canvas id="categoryChart"></canvas>
+        </div>
+      </div>
+      <div class="card hoverable rise-in" style="--d:.08s">
+        <div class="card-head"><div><h3>Recent Activities</h3><p>Latest events across your fleet.</p></div><a class="card-link" href="maintenance.html">View all</a></div>
+        <div class="timeline">
+          <div class="timeline-item success">
+            <span class="timeline-dot"></span>
+            <div class="timeline-content">
+              <p>Laptop A-2291 assigned to Sarah Chen</p>
+              <span>2 minutes ago</span>
+              <div class="meta"><span class="badge badge-success"><span class="dot"></span>Assigned</span></div>
+            </div>
+          </div>
+          <div class="timeline-item info">
+            <span class="timeline-dot"></span>
+            <div class="timeline-content">
+              <p>New asset registered — Dell Monitor U2723</p>
+              <span>15 minutes ago</span>
+              <div class="meta"><span class="badge badge-info"><span class="dot"></span>Registered</span></div>
+            </div>
+          </div>
+          <div class="timeline-item warning">
+            <span class="timeline-dot"></span>
+            <div class="timeline-content">
+              <p>MacBook Pro A-1042 returned for maintenance</p>
+              <span>1 hour ago</span>
+              <div class="meta"><span class="badge badge-warning"><span class="dot"></span>Maintenance</span></div>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <span class="timeline-dot"></span>
+            <div class="timeline-content">
+              <p>Storage utilization crossed 75%</p>
+              <span>3 hours ago</span>
+              <div class="meta"><span class="badge badge-neutral"><span class="dot"></span>System</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       PREMIUM DATA TABLE
+  ============================================================= -->
+  <section>
+    <div class="section-heading">
+      <div><h2 class="text-h2">Asset Inventory</h2><p class="text-small desc">Search, filter, and manage every asset in your fleet.</p></div>
+      <div style="display:flex;gap:10px;">
+        <a href="assets.html" class="btn btn-secondary btn-sm"><i class="fa-regular fa-rectangle-list"></i>View full inventory</a>
+        <button class="btn btn-secondary btn-sm" data-action="export-data"><i class="fa-regular fa-file-export"></i>Export</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="table-toolbar">
+        <div class="table-toolbar-left">
+          <div class="search-box">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input id="tableSearch" type="text" placeholder="Search by name, ID, or owner…">
+          </div>
+          <div class="filter-chip active" data-filter="All">All <span class="count">12</span></div>
+          <div class="filter-chip" data-filter="Active">Active</div>
+          <div class="filter-chip" data-filter="Available">Available</div>
+          <div class="filter-chip" data-filter="Maintenance">Maintenance</div>
+          <div class="filter-chip" data-filter="Retired">Retired</div>
+        </div>
+        <div style="display:flex;gap:8px;">
+          <div class="dropdown-wrap" data-dropdown>
+            <div class="dropdown-trigger"><i class="fa-solid fa-sliders"></i><span class="dropdown-label">Category</span><i class="fa-solid fa-chevron-down chev"></i></div>
+            <div class="dropdown-panel">
+              <div class="dropdown-option selected" data-label="Category">All categories</div>
+              <div class="dropdown-option" data-label="Laptops">Laptops</div>
+              <div class="dropdown-option" data-label="Monitors">Monitors</div>
+              <div class="dropdown-option" data-label="Mobile">Mobile</div>
+              <div class="dropdown-option" data-label="Peripherals">Peripherals</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="table-scroll">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th data-sort="name">Asset <i class="fa-solid fa-sort"></i></th>
+              <th data-sort="category">Category <i class="fa-solid fa-sort"></i></th>
+              <th data-sort="owner">Owner <i class="fa-solid fa-sort"></i></th>
+              <th data-sort="status">Status <i class="fa-solid fa-sort"></i></th>
+              <th data-sort="value">Value <i class="fa-solid fa-sort"></i></th>
+              <th data-sort="date">Added <i class="fa-solid fa-sort"></i></th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="assetsTableBody"><!-- rendered by script.js --></tbody>
+        </table>
+      </div>
+
+      <div class="table-footer">
+        <span id="pageInfo" class="text-small"></span>
+        <div class="pagination" id="pagination"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       UI COMPONENT LIBRARY
+  ============================================================= -->
+  <section>
+    <div class="section-heading">
+      <div><h2 class="text-h2">UI Components</h2><p class="text-small desc">The building blocks used across Asset OS.</p></div>
+    </div>
+
+    <div class="grid grid-3">
+
+      <!-- Buttons -->
+      <div class="card hoverable">
+        <div class="card-head"><div><h3>Buttons</h3><p>Primary, secondary, ghost, danger.</p></div></div>
+        <div style="display:flex;flex-wrap:wrap;gap:10px;">
+          <button class="btn btn-primary"><i class="fa-solid fa-plus"></i>Primary</button>
+          <button class="btn btn-secondary">Secondary</button>
+          <button class="btn btn-ghost">Ghost</button>
+          <button class="btn btn-danger"><i class="fa-regular fa-trash-can"></i>Danger</button>
+          <button class="btn btn-primary btn-icon tooltip" data-tooltip="Add asset"><i class="fa-solid fa-plus"></i></button>
+          <button class="btn btn-secondary" disabled>Disabled</button>
+        </div>
+      </div>
+
+      <!-- Inputs -->
+      <div class="card hoverable">
+        <div class="card-head"><div><h3>Inputs</h3><p>Text fields with focus states.</p></div></div>
+        <div style="display:flex;flex-direction:column;gap:12px;">
+          <div class="field"><label>Asset name</label><input class="input" type="text" placeholder="e.g. MacBook Pro 16&quot;"></div>
+          <div class="field"><label>Serial number</label><input class="input" type="text" placeholder="Auto-generated"></div>
+        </div>
+      </div>
+
+      <!-- Dropdowns -->
+      <div class="card hoverable">
+        <div class="card-head"><div><h3>Dropdown</h3><p>Custom select menu.</p></div></div>
+        <div class="dropdown-wrap" data-dropdown>
+          <div class="dropdown-trigger" style="width:100%;justify-content:space-between;">
+            <span><i class="fa-solid fa-layer-group"></i> <span class="dropdown-label">Select status</span></span>
+            <i class="fa-solid fa-chevron-down chev"></i>
+          </div>
+          <div class="dropdown-panel" style="width:100%;">
+            <div class="dropdown-option" data-label="Active">Active</div>
+            <div class="dropdown-option" data-label="Available">Available</div>
+            <div class="dropdown-option" data-label="Maintenance">Maintenance</div>
+            <div class="dropdown-option" data-label="Retired">Retired</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Date Picker -->
+      <div class="card hoverable">
+        <div class="card-head"><div><h3>Date Picker</h3><p>Pick a warranty or purchase date.</p></div></div>
+        <div class="datepicker-wrap" id="datePicker">
+          <div class="dropdown-trigger" style="width:100%;justify-content:space-between;">
+            <span><i class="fa-regular fa-calendar"></i> <span class="dropdown-label">Select date</span></span>
+            <i class="fa-solid fa-chevron-down chev"></i>
+          </div>
+          <div class="datepicker-panel">
+            <div class="dp-head">
+              <span class="dp-nav" id="dpPrev"><i class="fa-solid fa-chevron-left"></i></span>
+              <strong id="dpMonthLabel"></strong>
+              <span class="dp-nav" id="dpNext"><i class="fa-solid fa-chevron-right"></i></span>
+            </div>
+            <div class="dp-grid" id="dpGrid"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Badges -->
+      <div class="card hoverable">
+        <div class="card-head"><div><h3>Badges</h3><p>Status indicators.</p></div></div>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;">
+          <span class="badge badge-success"><span class="dot"></span>Active</span>
+          <span class="badge badge-info"><span class="dot"></span>Available</span>
+          <span class="badge badge-warning"><span class="dot"></span>Maintenance</span>
+          <span class="badge badge-danger"><span class="dot"></span>Overdue</span>
+          <span class="badge badge-neutral"><span class="dot"></span>Retired</span>
+        </div>
+      </div>
+
+      <!-- Progress Bars -->
+      <div class="card hoverable">
+        <div class="card-head"><div><h3>Progress Bars</h3><p>Utilization at a glance.</p></div></div>
+        <div style="margin-bottom:14px;">
+          <div class="progress-row"><span>Storage</span><small>75%</small></div>
+          <div class="progress"><div class="progress-bar warning" data-value="75"></div></div>
+        </div>
+        <div style="margin-bottom:14px;">
+          <div class="progress-row"><span>Fleet health</span><small>87%</small></div>
+          <div class="progress"><div class="progress-bar success" data-value="87"></div></div>
+        </div>
+        <div>
+          <div class="progress-row"><span>Backup sync</span><small>42%</small></div>
+          <div class="progress"><div class="progress-bar" data-value="42"></div></div>
+        </div>
+      </div>
+
+      <!-- Tooltips -->
+      <div class="card hoverable">
+        <div class="card-head"><div><h3>Tooltips</h3><p>Hover for context.</p></div></div>
+        <div style="display:flex;gap:16px;align-items:center;">
+          <span class="row-action-btn tooltip" data-tooltip="View details"><i class="fa-regular fa-eye"></i></span>
+          <span class="row-action-btn tooltip" data-tooltip="Edit asset"><i class="fa-regular fa-pen-to-square"></i></span>
+          <span class="row-action-btn danger tooltip" data-tooltip="Remove asset"><i class="fa-regular fa-trash-can"></i></span>
+          <span class="tooltip text-small" data-tooltip="Synced 2 minutes ago" style="cursor:default;"><i class="fa-solid fa-circle-info"></i>&nbsp;Sync status</span>
+        </div>
+      </div>
+
+      <!-- Loading Skeletons -->
+      <div class="card hoverable">
+        <div class="card-head"><div><h3>Loading Skeletons</h3><p>Content placeholders.</p></div></div>
+        <div style="display:flex;gap:12px;align-items:center;margin-bottom:12px;">
+          <div class="skeleton skeleton-circle" style="width:38px;height:38px;"></div>
+          <div style="flex:1;">
+            <div class="skeleton skeleton-text short"></div>
+            <div class="skeleton skeleton-text" style="width:80%;margin-bottom:0;"></div>
+          </div>
+        </div>
+        <div class="skeleton skeleton-text" style="height:80px;border-radius:12px;margin-bottom:0;"></div>
+      </div>
+
+      <!-- Modal + Toast triggers -->
+      <div class="card hoverable">
+        <div class="card-head"><div><h3>Modals &amp; Toasts</h3><p>Confirmations and feedback.</p></div></div>
+        <div style="display:flex;flex-wrap:wrap;gap:10px;">
+          <button class="btn btn-secondary btn-sm" onclick="openModal('demoModal')"><i class="fa-regular fa-window-restore"></i>Open modal</button>
+          <button class="btn btn-secondary btn-sm" onclick="showToast('success','Saved','Your changes were saved.')">Success toast</button>
+          <button class="btn btn-secondary btn-sm" onclick="showToast('warning','Warranty expiring','3 laptops expire this month.')">Warning toast</button>
+          <button class="btn btn-secondary btn-sm" onclick="showToast('danger','Sync failed','Could not reach the asset server.')">Error toast</button>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+</div>
+
+<!-- ============================================================
+     MODAL (demo)
+============================================================= -->
+<div class="modal-overlay" id="demoModal">
+  <div class="modal">
+    <div class="modal-head">
+      <h3>Retire this asset?</h3>
+      <span class="modal-close" onclick="closeModal('demoModal')"><i class="fa-solid fa-xmark"></i></span>
+    </div>
+    <div class="modal-body">This will mark <strong>MacBook Pro A-1042</strong> as retired and unassign it from its current owner. This action can be undone from the asset's history tab.</div>
+    <div class="modal-footer">
+      <button class="btn btn-secondary btn-sm" onclick="closeModal('demoModal')">Cancel</button>
+      <button class="btn btn-danger btn-sm" onclick="closeModal('demoModal'); showToast('success','Asset retired','MacBook Pro A-1042 has been retired.')">Retire asset</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     TOAST STACK
+============================================================= -->
+<div class="toast-stack" id="toastStack"></div>
+
+<script src="static/js/script.js"></script>
+</body>
+</html>
